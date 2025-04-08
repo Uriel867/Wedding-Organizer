@@ -1,31 +1,104 @@
 .login-container {
-    max-width: 400px;
-    margin: 100px auto;
-    padding: 30px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  
-  .login-container input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-  }
-  
-  .login-container button {
-    padding: 10px;
-    margin-top: 10px;
-    width: 100%;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .social-login button {
-    margin-top: 10px;
-    background-color: #f5f5f5;
-    border: 1px solid #aaa;
-  }
-  
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.login-container .sign-in {
+  padding: 10px;
+  margin-top: 10px;
+  width: 100%;
+  cursor: pointer;
+  font-weight: bold;
+}
+.social-login {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* space between buttons */
+  margin-top: 20px;
+}
+.sign-in {
+  width: 100%;
+  padding: 12px 0;
+  background-color: #5b37eb; /* vibrant purple */
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  border-radius: 999px; /* makes it pill-shaped */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 10px;
+}
+
+.sign-in:hover {
+  background-color: #5a3ddb; /* darker on hover */
+}
+
+
+
+.headline {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+.login-image img {
+  width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto; /* centers it */
+}
+
+.gsi-circle-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  padding: 0;
+  margin: 0; /* was margin-left: 80px */
+}
+
+
+.gsi-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.facebook-circle-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  padding: 0;
+  margin: 0; /* ← this fixes the layout issue */
+}
+
+.facebook-circle-button img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
