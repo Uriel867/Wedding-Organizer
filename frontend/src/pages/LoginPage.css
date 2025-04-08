@@ -1,3 +1,7 @@
+body {
+  background-color: #ffffffde; /* light gray */
+}
+
 .login-container {
   max-width: 400px;
   margin: 50px auto;
@@ -78,8 +82,8 @@
 
 
 .gsi-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 
 .facebook-circle-button {
@@ -98,7 +102,7 @@
 }
 
 .facebook-circle-button img {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
 }
