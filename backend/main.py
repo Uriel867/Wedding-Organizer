@@ -1,6 +1,12 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from .routers import users  # Use relative import
+from .database import Base, engine  # Use relative import
 
+# Create database tables
+Base.metadata.create_all(bind=engine)
+
+# FastAPI app setup
 app = FastAPI()
 
 app.add_middleware(
@@ -11,17 +17,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Include user routes
+app.include_router(users.router, prefix="/users", tags=["users"])
+
 @app.get("/")
 def read_root():
     return {"message": "Backend is running!"}
-
-@app.post("/login")
-async def login(request: Request):
-    data = await request.json()
-    email = data.get("email")
-    password = data.get("password")
-
-    if email == "test@example.com" and password == "1234":
-        return {"status": "ok"}
-    else:
-        return {"status": "error", "message": "Invalid credentials"}
