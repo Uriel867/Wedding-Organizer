@@ -1,8 +1,14 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from dotenv import load_dotenv
 
-DATABASE_URL = "postgresql://postgres:da1li2gi3@localhost/wedding_app"  # Replace with your credentials
+# Load environment variables from .env file
+load_dotenv()
+
+# Get the DATABASE_URL from environment variables
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
