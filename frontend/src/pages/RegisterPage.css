@@ -16,19 +16,19 @@ body {
 .brand-title {
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 h2 {
   font-size: 18px;
   font-weight: 500;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 }
 
 p {
   color: #6b7280;
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .divider {
@@ -57,9 +57,9 @@ p {
 
 .password-field span {
   position: absolute;
-  right: 0px;
+  right: 10px;
   top: 50%;
-  transform: translateY(-90%);
+  transform: translateY(-50%);
   cursor: pointer;
   color: #9ca3af;
 }
@@ -74,9 +74,7 @@ p {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-top: 4px;
-  margin-bottom: 16px;
-  margin-left: 10px;
+  margin-top: 8px;
   transition: background-color 0.2s ease;
 }
 
@@ -87,7 +85,7 @@ p {
 .terms {
   font-size: 12px;
   color: #6b7280;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .terms a {
@@ -97,6 +95,7 @@ p {
 
 .signin-link {
   font-size: 14px;
+  margin-top: 16px;
 }
 
 .signin-link a {

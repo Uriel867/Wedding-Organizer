@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from .. import schemas, crud
 from ..database import get_db
+import bcrypt
 
 router = APIRouter()
 
@@ -12,6 +13,9 @@ async def signup(request: schemas.SignupRequest, db: Session = Depends(get_db)):
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
 
+    # Hash the password
+    hashed_password = bcrypt.hashpw(request.password.encode('utf-8'), bcrypt.gensalt())
+
     # Create a new user
-    new_user = crud.create_user(db, request.name, request.email, request.password_hash)
+    new_user = crud.create_user(db, request.name, request.email, hashed_password.decode('utf-8'))
     return {"status": "ok", "user": {"id": new_user.id, "name": new_user.name, "email": new_user.email}}

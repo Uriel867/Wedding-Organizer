@@ -28,7 +28,7 @@ const RegisterPage = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: formData.fullName,
+          name: formData.fullName, // Match the backend schema
           email: formData.email,
           password: formData.password,
         }),
@@ -37,6 +37,7 @@ const RegisterPage = () => {
       const data = await response.json();
       if (response.ok) {
         alert("Registration successful!");
+        window.location.href = "/login"; // Redirect to login page
       } else {
         alert(data.detail || "Registration failed.");
       }
@@ -51,7 +52,6 @@ const RegisterPage = () => {
       <h1 className="brand-title">Wedding Supplier<br /><strong>Matcher</strong></h1>
       <h2>Create your account</h2>
       <p>Find your perfect wedding suppliers</p>
-
 
       <form onSubmit={handleSubmit} className="register-form">
         <input

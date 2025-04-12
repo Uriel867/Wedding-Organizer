@@ -1,6 +1,6 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 class SignupRequest(BaseModel):
     name: str
-    email: str
-    password_hash: str
+    email: EmailStr
+    password: str
