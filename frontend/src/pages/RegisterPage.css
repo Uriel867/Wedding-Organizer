@@ -1,110 +1,110 @@
 /* RegisterPage.css */
 
 body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: #fff;
-  }
-  
-  .register-container {
-    max-width: 400px;
-    margin: 60px auto;
-    padding: 0 20px;
-    text-align: center;
-  }
-  
-  .brand-title {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  
-  h2 {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 4px;
-  }
-  
-  p {
-    color: #6b7280;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-  
-  .divider {
-    margin: 12px 0;
-    color: #9ca3af;
-    font-size: 14px;
-  }
-  
-  .register-form input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 14px;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    background-color: #f9fafb;
-    font-size: 14px;
-  }
-  
-  .password-field {
-    position: relative;
-  }
-  
-  .password-field input {
-    padding-right: 40px;
-  }
-  
-  .password-field span {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #9ca3af;
-  }
-  
-  .create-account-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #4f46e5;
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 4px;
-    margin-bottom: 16px;
-    transition: background-color 0.2s ease;
-  }
-  
-  .create-account-button:hover {
-    background-color: #4338ca;
-  }
-  
-  .terms {
-    font-size: 12px;
-    color: #6b7280;
-    margin-bottom: 16px;
-  }
-  
-  .terms a {
-    color: #4f46e5;
-    text-decoration: underline;
-  }
-  
-  .signin-link {
-    font-size: 14px;
-  }
-  
-  .signin-link a {
-    color: #4f46e5;
-    font-weight: 500;
-    text-decoration: none;
-  }
-  
-  .signin-link a:hover {
-    text-decoration: underline;
-  }
-  
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #fff;
+}
+
+.register-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.brand-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+p {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.divider {
+  margin: 12px 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  font-size: 14px;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 15px;
+}
+
+.password-field span {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-90%);
+  cursor: pointer;
+  color: #9ca3af;
+}
+
+.create-account-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4f46e5;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  margin-left: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.create-account-button:hover {
+  background-color: #4338ca;
+}
+
+.terms {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.terms a {
+  color: #4f46e5;
+  text-decoration: underline;
+}
+
+.signin-link {
+  font-size: 14px;
+}
+
+.signin-link a {
+  color: #4f46e5;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.signin-link a:hover {
+  text-decoration: underline;
+}
