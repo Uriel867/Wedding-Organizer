@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link } from "react-router-dom";
 import "./LoginPage.css";
 import axios from "axios";
 import mcdonalndsImg from "./images/mcdonlads.jpg";
 import googleLogo from "./images/google-logo.png";
+import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa"; // Import icons
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,7 +16,6 @@ function LoginPage() {
     e.preventDefault();
 
     try {
-      // Send login request to the backend
       const response = await axios.post("http://localhost:8000/users/login", {
         email: email,
         password: password,
@@ -65,10 +65,20 @@ function LoginPage() {
         </form>
 
         {/* Display success message */}
-        {successMessage && <p className="success-message">{successMessage}</p>}
+        {successMessage && (
+          <p className="success-message">
+            <FaCheckCircle style={{ marginRight: "8px" }} />
+            {successMessage}
+          </p>
+        )}
 
         {/* Display error message */}
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {errorMessage && (
+          <p className="error-message">
+            <FaExclamationCircle style={{ marginRight: "8px" }} />
+            {errorMessage}
+          </p>
+        )}
 
         <div className="social-login">
           <button className="gsi-circle-button">

@@ -125,16 +125,32 @@ body {
   background-color: #0056b3;
 }
 
+/* Error message styling */
 .error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 10px;
+  color: #dc3545; /* Bootstrap red */
+  font-size: 16px;
+  margin-top: 15px;
   text-align: center;
+  font-weight: bold;
+  background-color: #f8d7da; /* Light red background */
+  border: 1px solid #f5c6cb; /* Red border */
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
+  width: 100%;
 }
 
+/* Success message styling */
 .success-message {
-  color: green;
-  font-size: 14px;
-  margin-top: 10px;
+  color: #28a745; /* Bootstrap green */
+  font-size: 16px;
+  margin-top: 15px;
   text-align: center;
+  font-weight: bold;
+  background-color: #d4edda; /* Light green background */
+  border: 1px solid #c3e6cb; /* Green border */
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
+  width: 100%;
 }
