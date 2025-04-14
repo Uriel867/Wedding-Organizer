@@ -57,9 +57,9 @@ p {
 
 .password-field span {
   position: absolute;
-  right: 10px;
+  right: 0px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-90%);
   cursor: pointer;
   color: #9ca3af;
 }
@@ -106,4 +106,16 @@ p {
 
 .signin-link a:hover {
   text-decoration: underline;
+}
+
+.success-message {
+  color: #4caf50; /* Green color for success */
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.error-message {
+  color: #f44336; /* Red color for errors */
+  font-size: 14px;
+  margin-top: 10px;
 }

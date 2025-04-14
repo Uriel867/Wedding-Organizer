@@ -11,6 +11,8 @@ const RegisterPage = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(""); // State for success message
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,8 +20,11 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSuccessMessage(""); // Clear previous messages
+    setErrorMessage("");
+
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match.");
+      setErrorMessage("Passwords do not match.");
       return;
     }
 
@@ -28,7 +33,7 @@ const RegisterPage = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: formData.fullName, // Match the backend schema
+          name: formData.fullName,
           email: formData.email,
           password: formData.password,
         }),
@@ -36,14 +41,14 @@ const RegisterPage = () => {
 
       const data = await response.json();
       if (response.ok) {
-        alert("Registration successful!");
-        window.location.href = "/login"; // Redirect to login page
+        setSuccessMessage("Registration successful!");
+        setFormData({ fullName: "", email: "", password: "", confirmPassword: "" }); // Clear form
       } else {
-        alert(data.detail || "Registration failed.");
+        setErrorMessage(data.detail || "Registration failed.");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred.");
+      setErrorMessage("An error occurred. Please try again.");
     }
   };
 
@@ -94,6 +99,10 @@ const RegisterPage = () => {
         </div>
 
         <button type="submit" className="create-account-button">Create Account</button>
+
+        {/* Display success or error message */}
+        {successMessage && <p className="success-message">{successMessage}</p>}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </form>
 
       <p className="terms">
