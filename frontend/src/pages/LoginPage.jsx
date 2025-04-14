@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link for navigation
 import "./LoginPage.css";
 import axios from "axios";
 import mcdonalndsImg from "./images/mcdonlads.jpg";
@@ -7,26 +8,30 @@ import googleLogo from "./images/google-logo.png";
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
+  const [successMessage, setSuccessMessage] = useState(""); // State for success message
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8000/login", {
+      // Send login request to the backend
+      const response = await axios.post("http://localhost:8000/users/login", {
         email: email,
         password: password,
       });
 
-      console.log("Server response:", response.data);
-
       if (response.data.status === "ok") {
-        alert("Login successful!");
+        setErrorMessage(""); // Clear any previous error
+        setSuccessMessage("Login successful!"); // Set success message
       } else {
-        alert("Login failed: " + response.data.message);
+        setSuccessMessage(""); // Clear any previous success message
+        setErrorMessage(response.data.message || "Invalid email or password");
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("Something went wrong. Try again.");
+      setSuccessMessage(""); // Clear any previous success message
+      setErrorMessage("Invalid email or password"); // Set error message
     }
   };
 
@@ -36,7 +41,7 @@ function LoginPage() {
         <h1>Find your perfect wedding suppliers</h1>
       </div>
       <div className="login-image">
-        <img src={mcdonalndsImg} alt="" />
+        <img src={mcdonalndsImg} alt="Wedding" />
       </div>
       <div className="login-container">
         <form onSubmit={handleSubmit}>
@@ -58,6 +63,12 @@ function LoginPage() {
             Sign In
           </button>
         </form>
+
+        {/* Display success message */}
+        {successMessage && <p className="success-message">{successMessage}</p>}
+
+        {/* Display error message */}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
 
         <div className="social-login">
           <button className="gsi-circle-button">
@@ -102,6 +113,14 @@ function LoginPage() {
               alt="Facebook logo"
             />
           </button>
+        </div>
+
+        {/* Add the Register button */}
+        <div className="register-link">
+          <p>Don't have an account?</p>
+          <Link to="/register">
+            <button className="register-button">Register</button>
+          </Link>
         </div>
       </div>
     </div>

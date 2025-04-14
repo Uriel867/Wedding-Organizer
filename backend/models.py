@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Integer, String, TIMESTAMP
-from .database import Base
+from sqlalchemy import Column, Integer, String, TIMESTAMP, func
+from database import Base
 
 class User(Base):
     __tablename__ = "users"
@@ -7,4 +7,4 @@ class User(Base):
     name = Column(String, nullable=False)
     email = Column(String, unique=True, nullable=False)
     password_hash = Column(String, nullable=False)
-    created_at = Column(TIMESTAMP, default="now()")
+    created_at = Column(TIMESTAMP, server_default=func.now())
