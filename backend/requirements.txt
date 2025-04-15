@@ -1,2 +1,8 @@
-fastapi>=0.110.0
+astapi>=0.110.0
 uvicorn[standard]>=0.29.0
+sqlalchemy>=1.4.0          # For database ORM
+databases>=0.5.0          # For async database queries
+pydantic>=1.10.0          # For data validation
+bcrypt>=4.0.0             # For password hashing
+python-dotenv>=1.0.0      # For environment variable management
+asyncpg>=0.27.0           # PostgreSQL driver (replace with your database driver if needed)
