@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // Import useNavigate and Link
 import "./LoginPage.css";
 import axios from "axios";
 import mcdonalndsImg from "./images/mcdonlads.jpg";
@@ -11,6 +11,7 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // State for error message
   const [successMessage, setSuccessMessage] = useState(""); // State for success message
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +25,7 @@ function LoginPage() {
       if (response.data.status === "ok") {
         setErrorMessage(""); // Clear any previous error
         setSuccessMessage("Login successful!"); // Set success message
+        navigate("/kyc-location"); // Redirect to KYC Location Page
       } else {
         setSuccessMessage(""); // Clear any previous success message
         setErrorMessage(response.data.message || "Invalid email or password");
