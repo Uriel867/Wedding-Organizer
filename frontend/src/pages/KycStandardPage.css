@@ -1,4 +1,4 @@
-/* KycLocationPage.css */
+/* KycStandardPage.css */
 
 /* Global */
 body {
@@ -17,45 +17,48 @@ body {
   color: #111827;
 }
 
-/* Header */
-.kyc-container h1 {
+/* Title */
+.kyc-title {
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 16px;
 }
 
-.kyc-container p {
+/* Description */
+.kyc-description {
   font-size: 14px;
-  color: #6B7280;
+  color: #6b7280;
   margin-bottom: 24px;
 }
 
 /* Card */
-.flower-card {
-  background-color: #FFFFFF;
+.kyc-card {
+  background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   padding: 24px;
-  text-align: left;
+  text-align: center;
   margin-bottom: 24px;
 }
 
-.flower-card h2 {
+.kyc-card h2 {
   font-size: 20px;
   font-weight: 600;
   margin: 0 0 8px;
 }
 
-.flower-card p {
+.kyc-card p {
   font-size: 14px;
-  color: #6B7280;
+  color: #6b7280;
   margin: 0 0 16px;
 }
 
 /* Card Actions */
-.flower-actions {
+.kyc-actions {
   display: flex;
   gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
 }
 
 .select-button {
@@ -79,8 +82,9 @@ body {
 }
 
 /* Image */
-.flower-image img {
-  width: 80%;
+.kyc-image img {
+  width: 100%;
+  max-width: 400px;
   height: auto;
   border-radius: 16px;
   object-fit: cover;
@@ -88,7 +92,7 @@ body {
 }
 
 /* Feedback Buttons */
-.flower-feedback {
+.kyc-feedback {
   display: flex;
   gap: 16px;
   justify-content: center;
@@ -97,8 +101,8 @@ body {
 
 .not-for-me-button {
   flex: 1;
-  background-color: #FEE2E2;
-  color: #B91C1C;
+  background-color: #fee2e2;
+  color: #b91c1c;
   border: none;
   padding: 12px 0;
   border-radius: 12px;
@@ -108,8 +112,8 @@ body {
 
 .love-it-button {
   flex: 1;
-  background-color: #DC2626;
-  color: #FFFFFF;
+  background-color: #dc2626;
+  color: #ffffff;
   border: none;
   padding: 12px 0;
   border-radius: 12px;
@@ -117,8 +121,9 @@ body {
   font-weight: 500;
 }
 
-/* Progress */
+/* Progress Indicator */
 .progress-indicator {
   font-size: 12px;
-  color: #9CA3AF;
+  color: #9ca3af;
+  margin-top: 16px;
 }

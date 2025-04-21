@@ -22,10 +22,16 @@ function LoginPage() {
         password: password,
       });
 
-      if (response.data.status === "ok") {
+      if (response.data.status === "kyc") {
+        localStorage.setItem("userEmail", email); // Store the email in local storage
         setErrorMessage(""); // Clear any previous error
-        setSuccessMessage("Login successful!"); // Set success message
-        navigate("/kyc-location"); // Redirect to KYC Location Page
+        setSuccessMessage("Redirecting to KYC...");
+        navigate("/kyc-flower"); // Redirect to KYC Location Page
+      } else if (response.data.status === "suppliers") {
+        localStorage.setItem("userEmail", email); // Store the email in local storage
+        setErrorMessage(""); // Clear any previous error
+        setSuccessMessage("Redirecting to wedding suppliers...");
+        navigate("/wedding-suppliers"); // Redirect to Wedding Suppliers Page
       } else {
         setSuccessMessage(""); // Clear any previous success message
         setErrorMessage(response.data.message || "Invalid email or password");
