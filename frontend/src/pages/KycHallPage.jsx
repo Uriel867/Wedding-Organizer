@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import KycPageTemplate from "../components/KycPageTemplate";
-import discoImage from "./images/disco.jpg";
+import hallImage from "./images/hall.jpg"; // Replace with the actual image path
 import axios from "axios";
 
-function KycDiscoPage() {
+function KycHallPage() {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem("userEmail"); // Retrieve the logged-in user's email
 
@@ -15,7 +15,7 @@ function KycDiscoPage() {
         email: userEmail,
         rankChange: 1, // Increase rank by 1
       });
-      navigate("/kyc-hall"); // Redirect to the next KYC page
+      navigate("/kyc-band"); // Redirect to the next KYC page
     } catch (error) {
       console.error("Error updating rank:", error);
     }
@@ -28,7 +28,7 @@ function KycDiscoPage() {
         email: userEmail,
         rankChange: -1, // Decrease rank by 1
       });
-      navigate("/kyc-hall"); // Redirect to the next KYC page
+      navigate("/kyc-band"); // Redirect to the next KYC page
     } catch (error) {
       console.error("Error updating rank:", error);
     }
@@ -36,14 +36,14 @@ function KycDiscoPage() {
 
   return (
     <KycPageTemplate
-      title="Do you like disco clubs?"
+      title="Do you like wedding halls with a rabbi?"
       description="Swipe left or right to select your preferred style"
-      imageSrc={discoImage}
+      imageSrc={hallImage} // Use the hall image
       onLike={handleLike}
       onDislike={handleDislike}
-      progress="2 of 5"
+      progress="3 of 5"
     />
   );
 }
 
-export default KycDiscoPage;
+export default KycHallPage;

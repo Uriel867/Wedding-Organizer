@@ -10,9 +10,10 @@ function KycFlowerPage() {
 
   const handleLike = async () => {
     try {
+      // Set the user's rank to 4
       await axios.post("http://localhost:8000/users/update-rank", {
         email: userEmail,
-        rank: 4, // Set rank to 4 for "I Love It"
+        rankChange: 4, // Explicitly set rank to 4
       });
       navigate("/kyc-disco"); // Redirect to the next KYC page
     } catch (error) {
@@ -22,10 +23,10 @@ function KycFlowerPage() {
 
   const handleDislike = async () => {
     try {
-// Send a POST request to update the user's rank to 5
+      // Set the user's rank to 5
       await axios.post("http://localhost:8000/users/update-rank", {
         email: userEmail,
-        rank: 5, // Set rank to 5 for "Not for me"
+        rankChange: 5, // Explicitly set rank to 5
       });
       navigate("/kyc-disco"); // Redirect to the next KYC page
     } catch (error) {

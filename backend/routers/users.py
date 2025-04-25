@@ -48,16 +48,16 @@ async def login(request: schemas.LoginRequest, db: Session = Depends(get_db)):
 
 class UpdateRankRequest(BaseModel):
     email: str
-    rank: int
+    rankChange: int  # Change rank dynamically
 
 @router.post("/update-rank")
 async def update_rank(request: UpdateRankRequest, db: Session = Depends(get_db)):
-    """Update the user's rank."""
+    """Update the user's rank dynamically."""
     user = crud.get_user_by_email(db, request.email)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
-    # Update the user's rank
-    user.rank = request.rank
+    # Update the user's rank dynamically
+    user.rank = max(0, min((user.rank or 0) + request.rankChange, 9))  # Ensure rank stays between 0 and 9
     db.commit()
     return {"status": "ok", "rank": user.rank}

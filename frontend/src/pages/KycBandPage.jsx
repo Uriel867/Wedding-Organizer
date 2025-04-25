@@ -1,21 +1,22 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import KycPageTemplate from "../components/KycPageTemplate";
-import discoImage from "./images/disco.jpg";
+import bandImage from "./images/band.jpg"; // Replace with the actual image path
 import axios from "axios";
 
-function KycDiscoPage() {
+function KycBandPage() {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem("userEmail"); // Retrieve the logged-in user's email
 
   const handleLike = async () => {
     try {
-      // Increase the user's rank by 1
+    // Decrease the user's rank by 1
+      
       await axios.post("http://localhost:8000/users/update-rank", {
         email: userEmail,
-        rankChange: 1, // Increase rank by 1
+        rankChange: -1, // Decrease rank by 1
       });
-      navigate("/kyc-hall"); // Redirect to the next KYC page
+      navigate("/kyc-dress"); // Redirect to the next KYC page
     } catch (error) {
       console.error("Error updating rank:", error);
     }
@@ -23,12 +24,12 @@ function KycDiscoPage() {
 
   const handleDislike = async () => {
     try {
-      // Decrease the user's rank by 1
+      // Increase the user's rank by 1
       await axios.post("http://localhost:8000/users/update-rank", {
         email: userEmail,
-        rankChange: -1, // Decrease rank by 1
+        rankChange: 1, // Increase rank by 1
       });
-      navigate("/kyc-hall"); // Redirect to the next KYC page
+      navigate("/kyc-dress"); // Redirect to the next KYC page
     } catch (error) {
       console.error("Error updating rank:", error);
     }
@@ -36,14 +37,14 @@ function KycDiscoPage() {
 
   return (
     <KycPageTemplate
-      title="Do you like disco clubs?"
+      title="Do you like classic wedding bands?"
       description="Swipe left or right to select your preferred style"
-      imageSrc={discoImage}
+      imageSrc={bandImage} // Use the band image
       onLike={handleLike}
       onDislike={handleDislike}
-      progress="2 of 5"
+      progress="4 of 5"
     />
   );
 }
 
-export default KycDiscoPage;
+export default KycBandPage;
