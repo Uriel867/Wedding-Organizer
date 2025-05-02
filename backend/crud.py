@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models import User
+from models import User, Vendor
 
 def get_user_by_email(db: Session, email: str):
     """Retrieve a user by their email."""
@@ -16,3 +16,15 @@ def create_user(db: Session, name: str, email: str, password_hash: str, rank: in
     db.commit()
     db.refresh(new_user)
     return new_user
+
+def create_vendor(db: Session, vendor_data: dict):
+    """Create a new vendor in the database."""
+    new_vendor = Vendor(**vendor_data)
+    db.add(new_vendor)
+    db.commit()
+    db.refresh(new_vendor)
+    return new_vendor
+
+def get_vendor_by_google_place_id(db: Session, google_place_id: str):
+    """Retrieve a vendor by their Google Place ID."""
+    return db.query(Vendor).filter(Vendor.google_place_id == google_place_id).first()
