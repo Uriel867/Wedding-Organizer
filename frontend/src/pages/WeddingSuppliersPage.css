@@ -1,0 +1,172 @@
+body {
+  background-color: #f9fafb;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.suppliers-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #4f46e5; /* Purple color */
+  margin-bottom: 10px;
+}
+
+.page-description {
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #4f46e5; /* Purple color */
+  margin-bottom: 10px;
+}
+
+.section h2 {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.supplier-list {
+  max-height: 200px; /* Limit height */
+  overflow-y: auto; /* Enable scrolling */
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f9fafb;
+}
+
+.supplier-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.supplier-card:last-child {
+  border-bottom: none;
+}
+
+.supplier {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.supplier:last-child {
+  border-bottom: none;
+}
+
+.supplier-info {
+  flex: 1;
+}
+
+.supplier-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.supplier-actions a,
+.supplier-actions button {
+  text-decoration: none;
+  color: #4f46e5; /* Purple color */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.supplier-actions button:hover,
+.supplier-actions a:hover {
+  color: #4338ca; /* Darker purple */
+}
+
+.heart-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #d1d5db; /* Gray for unliked state */
+  transition: color 0.2s ease;
+}
+
+.heart-button.liked {
+  color: #ef4444; /* Red for liked state */
+}
+
+.heart-button:hover {
+  color: #f87171; /* Lighter red on hover */
+}
+
+.website-icon {
+  font-size: 18px;
+  color: #4f46e5; /* Purple color */
+  text-decoration: none;
+}
+
+.website-icon:hover {
+  color: #4338ca; /* Darker purple */
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.purple-button {
+  background-color: #4f46e5; /* Purple color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.purple-button:hover {
+  background-color: #4338ca; /* Darker purple */
+}
+
+.no-suppliers-message {
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.loading-message {
+  text-align: center;
+  font-size: 16px;
+  color: #6b7280;
+}

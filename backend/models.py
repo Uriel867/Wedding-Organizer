@@ -29,6 +29,6 @@ class Vendor(Base):
     website = Column(String, nullable=True)
     lat = Column(Float, nullable=True)
     lng = Column(Float, nullable=True)
-    price_level = Column(Integer, nullable=True)
+    price_range = Column(String, nullable=True)  # Change from Integer to String
     wedding_score = Column(Integer, nullable=True)  # Optional: a score from 0–9
     created_at = Column(TIMESTAMP, server_default=func.now())
