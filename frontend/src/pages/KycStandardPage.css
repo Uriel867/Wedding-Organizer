@@ -1,0 +1,129 @@
+/* KycStandardPage.css */
+
+/* Global */
+body {
+  background-color: #F9FAFB;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Container */
+.kyc-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+  text-align: center;
+  color: #111827;
+}
+
+/* Title */
+.kyc-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Description */
+.kyc-description {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+/* Card */
+.kyc-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.kyc-card h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.kyc-card p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 16px;
+}
+
+/* Card Actions */
+.kyc-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.select-button {
+  background-color: #7C3AED;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.view-more-button {
+  background: transparent;
+  border: none;
+  color: #7C3AED;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Image */
+.kyc-image img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+/* Feedback Buttons */
+.kyc-feedback {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.not-for-me-button {
+  flex: 1;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: none;
+  padding: 12px 0;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.love-it-button {
+  flex: 1;
+  background-color: #dc2626;
+  color: #ffffff;
+  border: none;
+  padding: 12px 0;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Progress Indicator */
+.progress-indicator {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 16px;
+}
