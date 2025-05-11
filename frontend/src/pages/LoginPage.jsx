@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom"; // Import useNavigate and Link
 import "./LoginPage.css";
 import axios from "axios";
-import mcdonalndsImg from "./images/mcdonlads.jpg";
-import googleLogo from "./images/google-logo.png";
+import loginpageimg from "./images/loginpageimg.jpg";
 import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa"; // Import icons
 
 function LoginPage() {
@@ -49,7 +48,7 @@ function LoginPage() {
         <h1>Find your perfect wedding suppliers</h1>
       </div>
       <div className="login-image">
-        <img src={mcdonalndsImg} alt="Wedding" />
+        <img src={loginpageimg} alt="Wedding" />
       </div>
       <div className="login-container">
         <form onSubmit={handleSubmit}>

@@ -36,8 +36,8 @@ function KycFlowerPage() {
 
   return (
     <KycPageTemplate
-      title="Choose your ideal flowers"
-      description="Swipe left or right to select your preferred style"
+      title="Do you like those flowers?"
+      description="If yes click the i love it button!"
       imageSrc={flowersImage}
       onLike={handleLike}
       onDislike={handleDislike}

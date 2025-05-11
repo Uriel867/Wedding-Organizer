@@ -36,8 +36,8 @@ function KycDiscoPage() {
 
   return (
     <KycPageTemplate
-      title="Do you like disco clubs?"
-      description="Swipe left or right to select your preferred style"
+      title="Do you like disco music?"
+      description="If yes click the i love it button!"
       imageSrc={discoImage}
       onLike={handleLike}
       onDislike={handleDislike}

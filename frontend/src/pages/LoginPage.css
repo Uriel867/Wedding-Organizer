@@ -26,12 +26,15 @@ body {
   cursor: pointer;
   font-weight: bold;
 }
+
 .social-login {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 20px; /* space between buttons */
   margin-top: 20px;
 }
+
 .sign-in {
   width: 100%;
   padding: 12px 0;
@@ -59,7 +62,7 @@ body {
 }
 
 .login-image img {
-  width: 200px;
+  width: 350px;   
   height: auto;
   display: block;
   margin: 0 auto; /* centers it */

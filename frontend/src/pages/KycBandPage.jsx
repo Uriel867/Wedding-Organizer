@@ -37,8 +37,8 @@ function KycBandPage() {
 
   return (
     <KycPageTemplate
-      title="Do you like classic wedding bands?"
-      description="Swipe left or right to select your preferred style"
+      title="Do you like that song?"
+      description="If yes click the i love it button!"
       imageSrc={bandImage} // Use the band image
       onLike={handleLike}
       onDislike={handleDislike}

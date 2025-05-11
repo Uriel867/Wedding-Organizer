@@ -36,8 +36,8 @@ function KycDressPage() {
 
   return (
     <KycPageTemplate
-      title="Do you like extreme wedding dresses?"
-      description="Swipe left or right to select your preferred style"
+      title="Do you like this wedding dresses?"
+      description="If yes click the i love it button!"
       imageSrc={dressImage} // Use the dress image
       onLike={handleLike}
       onDislike={handleDislike}

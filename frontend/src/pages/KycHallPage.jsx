@@ -36,8 +36,8 @@ function KycHallPage() {
 
   return (
     <KycPageTemplate
-      title="Do you like wedding halls with a rabbi?"
-      description="Swipe left or right to select your preferred style"
+      title="Would you like a rabbi to lead the ceramony?"
+      description="If yes click the i love it button!"
       imageSrc={hallImage} // Use the hall image
       onLike={handleLike}
       onDislike={handleDislike}
