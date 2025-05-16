@@ -127,6 +127,12 @@ h1 {
   color: #f87171; /* Lighter red on hover */
 }
 
+.heart-icon {
+  font-size: 18px;
+  color: #d1d5db; /* Gray for empty heart */
+  cursor: default;
+}
+
 .website-icon {
   font-size: 18px;
   color: #4f46e5; /* Purple color */
