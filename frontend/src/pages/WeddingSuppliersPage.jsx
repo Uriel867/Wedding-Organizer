@@ -43,6 +43,7 @@ function WeddingSuppliersPage() {
   const [groupedSuppliers, setGroupedSuppliers] = useState({});
   const [loading, setLoading] = useState(true);
   const [likedSuppliers, setLikedSuppliers] = useState({}); // Track liked suppliers
+  const [showSelected, setShowSelected] = useState(false); // Toggle to show only liked suppliers
 
   useEffect(() => {
     // Fetch suppliers from the backend
@@ -79,9 +80,27 @@ function WeddingSuppliersPage() {
     }));
   };
 
+  // Filter suppliers based on the `showSelected` state
+  const getFilteredSuppliers = () => {
+    if (!showSelected) {
+      return groupedSuppliers;
+    }
+
+    const filteredSuppliers = {};
+    Object.entries(groupedSuppliers).forEach(([section, suppliers]) => {
+      filteredSuppliers[section] = suppliers.filter(
+        (supplier) => likedSuppliers[supplier.id]
+      );
+    });
+
+    return filteredSuppliers;
+  };
+
   if (loading) {
     return <p className="loading-message">Loading suppliers...</p>;
   }
+
+  const filteredSuppliers = getFilteredSuppliers();
 
   return (
     <div className="suppliers-container">
@@ -90,7 +109,14 @@ function WeddingSuppliersPage() {
         Based on your preferences, we've matched you with these suppliers:
       </p>
 
-      {Object.entries(groupedSuppliers).map(([section, suppliers]) => (
+      <button
+        className="purple-button"
+        onClick={() => setShowSelected((prev) => !prev)}
+      >
+        {showSelected ? "Show All" : "Show Selected"}
+      </button>
+
+      {Object.entries(filteredSuppliers).map(([section, suppliers]) => (
         <div key={section} className="section">
           <h2 className="section-title">{section}</h2>
           <div className="supplier-list">
@@ -111,11 +137,6 @@ function WeddingSuppliersPage() {
           </div>
         </div>
       ))}
-
-      <div className="action-buttons">
-        <button className="purple-button">Compare Selected</button>
-        <button className="purple-button">Share Results</button>
-      </div>
     </div>
   );
 }
