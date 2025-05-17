@@ -6,7 +6,7 @@ from crud import create_vendor, get_vendor_by_google_place_id
 from dotenv import load_dotenv
 from sections import sections
 from models import Vendor
-MAX_VENDORS_PER_KEYWORD = 10
+MAX_VENDORS_PER_KEYWORD = 20
 # Load environment variables
 load_dotenv()
 
