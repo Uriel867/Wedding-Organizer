@@ -8,6 +8,8 @@ import KycHallPage from "./pages/KycHallPage"; // Import Hall KYC Page
 import KycBandPage from "./pages/KycBandPage"; // Import Band KYC Page
 import KycDressPage from "./pages/KycDressPage"; // Import Dress KYC Page
 import WeddingSuppliersPage from "./pages/WeddingSuppliersPage"; // Import Wedding Suppliers Page
+import SupplierLoginPage from "./pages/SupplierLoginPage"; // Import Supplier Login Page
+import SupplierRegisterPage from "./pages/SupplierRegisterPage"; // Import Supplier Register Page
 
 function App() {
   return (
@@ -36,6 +38,12 @@ function App() {
 
         {/* Route for the Wedding Suppliers Page */}
         <Route path="/wedding-suppliers" element={<WeddingSuppliersPage />} />
+
+        {/* Route for the Supplier Login Page */}
+        <Route path="/supplier-login" element={<SupplierLoginPage />} />
+
+        {/* Route for the Supplier Register Page */}
+        <Route path="/supplier-register" element={<SupplierRegisterPage />} />
 
         {/* Default Route (Redirect to Login) */}
         <Route path="*" element={<Navigate to="/login" />} />

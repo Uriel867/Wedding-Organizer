@@ -139,6 +139,14 @@ function LoginPage() {
             <button className="register-button">Register</button>
           </Link>
         </div>
+
+        {/* Add the Supplier Login button */}
+        <div className="supplier-login-link">
+          <p>Are you a supplier?</p>
+          <Link to="/supplier-login">
+            <button className="supplier-login-button">Supplier Login</button>
+          </Link>
+        </div>
       </div>
     </div>
   );
