@@ -4,30 +4,20 @@ from sqlalchemy.orm import Session
 from database import SessionLocal
 from crud import create_vendor, get_vendor_by_google_place_id
 from dotenv import load_dotenv
-
+from sections import sections
+from models import Vendor
+MAX_VENDORS_PER_KEYWORD = 10
 # Load environment variables
 load_dotenv()
 
 # Google Places API key
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
-# Hebrew keywords for search
-keywords = [
-    "אולם אירועים", "גן אירועים", "מקום לחתונה", "אולמות חתונה", "וילה לאירועים",
-    "קייטרינג לחתונה", "שירותי קייטרינג", "קייטרינג לאירועים", "אוכל לאירועים",
-    "תקליטן לחתונה", "DJ לחתונה", "להקה לחתונה", "מוזיקה לאירועים", "הרכב מוסיקלי לאירועים",
-    "צלם חתונות", "צלם לחתונה", "צלם מגנטים", "וידאו לחתונה",
-    "עוגת חתונה", "קינוחים לאירועים", "קונדיטוריה לאירועים",
-    "מתנות לאורחים", "אטרקציות לאירועים", "שולחנות משחק לחתונה", "עמדת צילום לאירועים",
-    "מעצבת אירועים", "הפקת חתונות", "עיצוב אירועים",
-    "רכב לחתונה", "לימוזינה לחתונה", "הסעות לאירועים"
-]
-
 locations = [
-    {"name": "Tel Aviv", "lat": 32.0853, "lng": 34.7818},
+   {"name": "Tel Aviv", "lat": 32.0853, "lng": 34.7818},
     {"name": "Haifa", "lat": 32.7940, "lng": 34.9896},
-    {"name": "Jerusalem", "lat": 31.7683, "lng": 35.2137},
-    {"name": "Be'er Sheva", "lat": 31.2518, "lng": 34.7913},
+    # {"name": "Jerusalem", "lat": 31.7683, "lng": 35.2137},
+    #{"name": "Be'er Sheva", "lat": 31.2518, "lng": 34.7913},
     {"name": "Eilat", "lat": 29.5581, "lng": 34.9482}
 ]
 # Function to fetch data from Google Places API
@@ -76,49 +66,52 @@ def fetch_place_details(place_id):
         "website": details.get("website")
     }
 
+def get_section_for_category(category):
+    for section, categories in sections.items():
+        if category in categories:
+            return section
+    return None
+
+class VendorLimitReached(Exception):
+    pass
+
 # Function to save vendors to the database
-def save_vendors_to_db(vendors, category, db: Session):
+def save_vendors_to_db(vendors, category, section, db: Session):
+    current_vendor_count = db.query(Vendor).count()
+    max_vendors = 900
     for vendor in vendors:
+        # Stop if we've reached the limit
+        if current_vendor_count >= max_vendors:
+            print("Reached vendor limit, stopping fetch.")
+            raise VendorLimitReached()
         # Check if the vendor already exists in the database
         existing_vendor = get_vendor_by_google_place_id(db, vendor["place_id"])
         if existing_vendor:
             print(f"Vendor already exists: {vendor['name']}")
             continue
-
         # Fetch additional details (phone number and website)
         details = fetch_place_details(vendor["place_id"])
-
-        # Map price_level to price_range (exclude "Free")
-        price_level = vendor.get("price_level")
-        price_range = None
-        if price_level is not None:
-            if price_level == 1 or price_level == 0:
-                price_range = "$"  # Inexpensive
-            elif price_level == 2:
-                price_range = "$$"  # Moderate
-            elif price_level == 3:
-                price_range = "$$$"  # Expensive
-            elif price_level == 4:
-                price_range = "$$$$"  # Very Expensive
-
-        # Prepare vendor data
+        # Prepare vendor data according to the new Vendor model
         vendor_data = {
             "google_place_id": vendor["place_id"],
-            "name": vendor["name"],
+            "buisness_name": vendor["name"],
             "category": category,
+            "section": section,
             "rating": vendor.get("rating"),
             "user_ratings_total": vendor.get("user_ratings_total"),
             "address": vendor.get("formatted_address"),
-            "phone_number": details.get("phone_number"),  # Add phone number
-            "website": details.get("website"),            # Add website
+            "phone_number": details.get("phone_number"),
+            "website": details.get("website"),
             "lat": vendor["geometry"]["location"]["lat"],
             "lng": vendor["geometry"]["location"]["lng"],
-            "price_range": price_range,                   # Use price_range only
-            "wedding_score": None  # Optional: Can be calculated later
+            "ARS_score": None,
+            "email": None,
+            "password_hash": None,
+            "kyc_completed": 0
         }
-
         # Save the vendor to the database
         create_vendor(db, vendor_data)
+        current_vendor_count += 1
         print(f"Vendor saved: {vendor['name']}")
 
 # Main function to fetch and save vendors
@@ -126,11 +119,17 @@ def main():
     db = SessionLocal()
     try:
         for location in locations:
-            for keyword in keywords:
-                print(f"Fetching vendors for keyword: {keyword} in {location['name']}")
-                vendors = fetch_vendors_from_api(keyword, location)
-                save_vendors_to_db(vendors, category=keyword, db=db)
-                print(f"Finished processing keyword: {keyword} in {location['name']}")
+            for section, keywords_in_section in sections.items():
+                for keyword in keywords_in_section:
+                    print(f"Fetching vendors for keyword: {keyword} in section: {section} at {location['name']}")
+                    vendors = fetch_vendors_from_api(keyword, location)
+                    vendors = vendors[:MAX_VENDORS_PER_KEYWORD]  # Only keep up to 6 vendors per keyword
+                    try:
+                        save_vendors_to_db(vendors, category=keyword, section=section, db=db)
+                    except VendorLimitReached:
+                        print("Global vendor limit reached. Stopping all fetching.")
+                        return
+                    print(f"Finished processing keyword: {keyword} in section: {section} at {location['name']}")
     finally:
         db.close()
 

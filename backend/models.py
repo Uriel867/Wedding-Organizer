@@ -22,6 +22,7 @@ class Vendor(Base):
     google_place_id = Column(String, unique=True, nullable=False)
     buisness_name = Column(String, nullable=False)
     category = Column(String, nullable=True)  # Optional: based on search query
+    section = Column(String, nullable=True)  # Optional: based on search query
     rating = Column(Float, nullable=True)
     user_ratings_total = Column(Integer, nullable=True)
     address = Column(Text, nullable=True)
@@ -29,11 +30,10 @@ class Vendor(Base):
     website = Column(String, nullable=True)
     lat = Column(Float, nullable=True)
     lng = Column(Float, nullable=True)
-    price_range = Column(String, nullable=True)  # Change from Integer to String
-    wedding_score = Column(Integer, nullable=True)  # Optional: a score from 0–9
+    ARS_score = Column(Integer, nullable=True)  # Optional: a score from 0–9
     created_at = Column(TIMESTAMP, server_default=func.now())
-    email = Column(String, unique=True, nullable=False)
-    password_hash = Column(String, nullable=False)
+    email = Column(String, unique=True, nullable=True)
+    password_hash = Column(String, nullable=True)
     kyc_completed = Column(Integer, default=0)  # 0 = not completed, 1 = completed
 
 
