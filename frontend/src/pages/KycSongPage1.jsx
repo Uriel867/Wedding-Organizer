@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import KycPageTemplate from "../components/KycPageTemplate";
-import bandImage from "./images/band.jpg"; // Replace with the actual image path
+import bandImage from "./images/band.jpg";
 import axios from "axios";
 
-function KycBandPage() {
+function KycSongPage1() {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem("userEmail"); // Retrieve the logged-in user's email
 
@@ -14,7 +14,7 @@ function KycBandPage() {
         email: userEmail,
         rankChange: value,
       });
-      navigate("/kyc-dress"); // Redirect to the next KYC page
+      navigate("/kyc-song-2"); // Go to KycSongPage2 after KycSongPage1
     } catch (error) {
       console.error("Error updating rank:", error);
     }
@@ -24,11 +24,11 @@ function KycBandPage() {
     <KycPageTemplate
       title="Do you like that song?"
       description="Rate your preference on the scale below."
-      imageSrc={bandImage} // Use the band image
+      imageSrc={bandImage}
       onScaleSubmit={handleScaleSubmit}
       progress="4 of 5"
     />
   );
 }
 
-export default KycBandPage;
+export default KycSongPage1;

@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import KycPageTemplate from "../components/KycPageTemplate";
-import hallImage from "./images/hall.jpg"; // Replace with the actual image path
+import steakImage from "./images/steak.avif";
 import axios from "axios";
 
-function KycHallPage() {
+function KycSteakPage1() {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem("userEmail"); // Retrieve the logged-in user's email
 
@@ -14,7 +14,7 @@ function KycHallPage() {
         email: userEmail,
         rankChange: value,
       });
-      navigate("/kyc-band");
+      navigate("/kyc-steak-2"); // Go to KycSteakPage2 after KycSteakPage1
     } catch (error) {
       console.error("Error updating rank:", error);
     }
@@ -22,13 +22,13 @@ function KycHallPage() {
 
   return (
     <KycPageTemplate
-      title="Would you like a rabbi to lead the ceramony?"
+      title="Do you like steak?"
       description="Rate your preference on the scale below."
-      imageSrc={hallImage}
+      imageSrc={steakImage}
       onScaleSubmit={handleScaleSubmit}
-      progress="3 of 5"
+      progress="2 of 5"
     />
   );
 }
 
-export default KycHallPage;
+export default KycSteakPage1;

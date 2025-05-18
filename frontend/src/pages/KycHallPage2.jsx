@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import KycPageTemplate from "../components/KycPageTemplate";
-import dressImage from "./images/dress.jpg"; // Replace with the actual image path
+import hallImage from "./images/hall.jpg";
 import axios from "axios";
 
-function KycDressPage() {
+function KycHallPage2() {
   const navigate = useNavigate();
-  const userEmail = localStorage.getItem("userEmail"); // Retrieve the logged-in user's email
+  const userEmail = localStorage.getItem("userEmail");
 
   const handleScaleSubmit = async (value) => {
     try {
@@ -14,7 +14,7 @@ function KycDressPage() {
         email: userEmail,
         rankChange: value,
       });
-      navigate("/wedding-suppliers");
+      navigate("/kyc-steak"); // Go to KycSteakPage1 after KycHallPage2
     } catch (error) {
       console.error("Error updating rank:", error);
     }
@@ -22,13 +22,13 @@ function KycDressPage() {
 
   return (
     <KycPageTemplate
-      title="Do you like this wedding dresses?"
+      title="כמה דתית היית רוצה את החתונה? (Page 2)"
       description="Rate your preference on the scale below."
-      imageSrc={dressImage}
+      imageSrc={hallImage}
       onScaleSubmit={handleScaleSubmit}
-      progress="5 of 5"
+      progress="3 of 5"
     />
   );
 }
 
-export default KycDressPage;
+export default KycHallPage2;

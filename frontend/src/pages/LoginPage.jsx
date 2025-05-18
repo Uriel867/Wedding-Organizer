@@ -25,7 +25,7 @@ function LoginPage() {
         localStorage.setItem("userEmail", email); // Store the email in local storage
         setErrorMessage(""); // Clear any previous error
         setSuccessMessage("Redirecting to KYC...");
-        navigate("/kyc-flower"); // Redirect to KYC Location Page
+        navigate("/kyc-song"); // Redirect to first KYC page in the correct flow
       } else if (response.data.status === "suppliers") {
         localStorage.setItem("userEmail", email); // Store the email in local storage
         setErrorMessage(""); // Clear any previous error

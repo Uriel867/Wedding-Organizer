@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import KycPageTemplate from "../components/KycPageTemplate";
-import discoImage from "./images/disco.jpg";
+import hallImage from "./images/hall.jpg"; // Replace with the actual image path
 import axios from "axios";
 
-function KycDiscoPage() {
+function KycHallPage1() {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem("userEmail"); // Retrieve the logged-in user's email
 
@@ -14,7 +14,7 @@ function KycDiscoPage() {
         email: userEmail,
         rankChange: value,
       });
-      navigate("/kyc-hall");
+      navigate("/kyc-hall-2"); // Go to KycHallPage2 after KycHallPage1
     } catch (error) {
       console.error("Error updating rank:", error);
     }
@@ -22,13 +22,13 @@ function KycDiscoPage() {
 
   return (
     <KycPageTemplate
-      title="Do you like disco music?"
+      title="כמה דתית היית רוצה את החתונה?"
       description="Rate your preference on the scale below."
-      imageSrc={discoImage}
+      imageSrc={hallImage}
       onScaleSubmit={handleScaleSubmit}
-      progress="2 of 5"
+      progress="3 of 5"
     />
   );
 }
 
-export default KycDiscoPage;
+export default KycHallPage1;

@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import KycPageTemplate from "../components/KycPageTemplate";
-import flowersImage from "./images/flowers.jpg";
+import steakImage from "./images/steak.avif";
 import axios from "axios";
 
-function KycFlowerPage() {
+function KycSteakPage2() {
   const navigate = useNavigate();
-  const userEmail = localStorage.getItem("userEmail"); // Retrieve the logged-in user's email
+  const userEmail = localStorage.getItem("userEmail");
 
   const handleScaleSubmit = async (value) => {
     try {
@@ -14,7 +14,7 @@ function KycFlowerPage() {
         email: userEmail,
         rankChange: value,
       });
-      navigate("/kyc-disco"); // Redirect to the next KYC page
+      navigate("/wedding-suppliers"); // Go to WeddingSuppliersPage after KycSteakPage2
     } catch (error) {
       console.error("Error updating rank:", error);
     }
@@ -22,13 +22,13 @@ function KycFlowerPage() {
 
   return (
     <KycPageTemplate
-      title="Do you like those flowers?"
+      title="Do you like steak? (Page 2)"
       description="Rate your preference on the scale below."
-      imageSrc={flowersImage}
+      imageSrc={steakImage}
       onScaleSubmit={handleScaleSubmit}
-      progress="1 of 5"
+      progress="2 of 5"
     />
   );
 }
 
-export default KycFlowerPage;
+export default KycSteakPage2;
