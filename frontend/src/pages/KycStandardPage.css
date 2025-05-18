@@ -127,3 +127,76 @@ body {
   color: #9ca3af;
   margin-top: 16px;
 }
+
+/* KycScale styles */
+.kyc-scale-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+.kyc-scale-labels {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.kyc-scale-label {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin: 0 2px;
+  font-weight: bold;
+  color: #fff;
+  background: #ccc;
+  font-size: 1.1em;
+  transition: background 0.2s, color 0.2s;
+}
+.kyc-scale-label-1 { background: #d32f2f; }
+.kyc-scale-label-2 { background: #e64a19; }
+.kyc-scale-label-3 { background: #f57c00; }
+.kyc-scale-label-4 { background: #fbc02d; }
+.kyc-scale-label-5 { background: #fdd835; }
+.kyc-scale-label-6 { background: #d4e157; }
+.kyc-scale-label-7 { background: #aed581; }
+.kyc-scale-label-8 { background: #81c784; }
+.kyc-scale-label-9 { background: #388e3c; }
+.kyc-scale-label-10 { background: #009688; }
+.kyc-scale-label.selected {
+  border: 2px solid #222;
+  color: #222;
+  background: #fff;
+}
+.kyc-scale-range {
+  width: 340px;
+  margin: 0 0 8px 0;
+  accent-color: #388e3c;
+}
+.kyc-scale-value {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+/* Next Button */
+.kyc-next-button {
+  width: 100%;
+  max-width: 520px;
+  background: #5a38ea;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.3em;
+  border: none;
+  border-radius: 2em;
+  padding: 16px 0;
+  margin: 0 auto;
+  display: block;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.kyc-next-button:hover {
+  background: #472bb5;
+}

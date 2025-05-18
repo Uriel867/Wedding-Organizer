@@ -1,7 +1,8 @@
 import React from "react";
 import "../pages/KycStandardPage.css"; // Corrected path to the CSS file
+import KycScale from "./KycScale";
 
-function KycPageTemplate({ title, description, imageSrc, onLike, onDislike, progress }) {
+function KycPageTemplate({ title, description, imageSrc, onLike, onDislike, progress, onScaleSubmit }) {
   return (
     <div className="kyc-container">
       <h1 className="kyc-title">{title}</h1>
@@ -14,12 +15,7 @@ function KycPageTemplate({ title, description, imageSrc, onLike, onDislike, prog
       </div>
 
       <div className="kyc-feedback">
-        <button className="not-for-me-button" onClick={onDislike}>
-          Not for me
-        </button>
-        <button className="love-it-button" onClick={onLike}>
-          I love it
-        </button>
+        <KycScale onSubmit={onScaleSubmit} />
       </div>
 
       <p className="progress-indicator">{progress}</p>

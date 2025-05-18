@@ -8,27 +8,13 @@ function KycDressPage() {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem("userEmail"); // Retrieve the logged-in user's email
 
-  const handleLike = async () => {
+  const handleScaleSubmit = async (value) => {
     try {
-      // Increase the user's rank by 1
       await axios.post("http://localhost:8000/users/update-rank", {
         email: userEmail,
-        rankChange: 1, // Increase rank by 1
+        rankChange: value,
       });
-      navigate("/wedding-suppliers"); // Redirect to the wedding suppliers page
-    } catch (error) {
-      console.error("Error updating rank:", error);
-    }
-  };
-
-  const handleDislike = async () => {
-    try {
-      // Decrease the user's rank by 1
-      await axios.post("http://localhost:8000/users/update-rank", {
-        email: userEmail,
-        rankChange: -1, // Decrease rank by 1
-      });
-      navigate("/wedding-suppliers"); // Redirect to the wedding suppliers page
+      navigate("/wedding-suppliers");
     } catch (error) {
       console.error("Error updating rank:", error);
     }
@@ -37,10 +23,9 @@ function KycDressPage() {
   return (
     <KycPageTemplate
       title="Do you like this wedding dresses?"
-      description="If yes click the i love it button!"
-      imageSrc={dressImage} // Use the dress image
-      onLike={handleLike}
-      onDislike={handleDislike}
+      description="Rate your preference on the scale below."
+      imageSrc={dressImage}
+      onScaleSubmit={handleScaleSubmit}
       progress="5 of 5"
     />
   );

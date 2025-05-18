@@ -8,27 +8,13 @@ function KycDiscoPage() {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem("userEmail"); // Retrieve the logged-in user's email
 
-  const handleLike = async () => {
+  const handleScaleSubmit = async (value) => {
     try {
-      // Increase the user's rank by 1
       await axios.post("http://localhost:8000/users/update-rank", {
         email: userEmail,
-        rankChange: 1, // Increase rank by 1
+        rankChange: value,
       });
-      navigate("/kyc-hall"); // Redirect to the next KYC page
-    } catch (error) {
-      console.error("Error updating rank:", error);
-    }
-  };
-
-  const handleDislike = async () => {
-    try {
-      // Decrease the user's rank by 1
-      await axios.post("http://localhost:8000/users/update-rank", {
-        email: userEmail,
-        rankChange: -1, // Decrease rank by 1
-      });
-      navigate("/kyc-hall"); // Redirect to the next KYC page
+      navigate("/kyc-hall");
     } catch (error) {
       console.error("Error updating rank:", error);
     }
@@ -37,10 +23,9 @@ function KycDiscoPage() {
   return (
     <KycPageTemplate
       title="Do you like disco music?"
-      description="If yes click the i love it button!"
+      description="Rate your preference on the scale below."
       imageSrc={discoImage}
-      onLike={handleLike}
-      onDislike={handleDislike}
+      onScaleSubmit={handleScaleSubmit}
       progress="2 of 5"
     />
   );

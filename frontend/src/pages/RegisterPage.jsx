@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./RegisterPage.css";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -43,6 +46,7 @@ const RegisterPage = () => {
       if (response.ok) {
         setSuccessMessage("Registration successful!");
         setFormData({ fullName: "", email: "", password: "", confirmPassword: "" }); // Clear form
+        setTimeout(() => navigate("/login"), 1200); // Redirect to login after 1.2s
       } else {
         setErrorMessage(data.detail || "Registration failed.");
       }

@@ -8,25 +8,11 @@ function KycFlowerPage() {
   const navigate = useNavigate();
   const userEmail = localStorage.getItem("userEmail"); // Retrieve the logged-in user's email
 
-  const handleLike = async () => {
+  const handleScaleSubmit = async (value) => {
     try {
-      // Set the user's rank to 4
       await axios.post("http://localhost:8000/users/update-rank", {
         email: userEmail,
-        rankChange: 4, // Explicitly set rank to 4
-      });
-      navigate("/kyc-disco"); // Redirect to the next KYC page
-    } catch (error) {
-      console.error("Error updating rank:", error);
-    }
-  };
-
-  const handleDislike = async () => {
-    try {
-      // Set the user's rank to 5
-      await axios.post("http://localhost:8000/users/update-rank", {
-        email: userEmail,
-        rankChange: 5, // Explicitly set rank to 5
+        rankChange: value,
       });
       navigate("/kyc-disco"); // Redirect to the next KYC page
     } catch (error) {
@@ -37,10 +23,9 @@ function KycFlowerPage() {
   return (
     <KycPageTemplate
       title="Do you like those flowers?"
-      description="If yes click the i love it button!"
+      description="Rate your preference on the scale below."
       imageSrc={flowersImage}
-      onLike={handleLike}
-      onDislike={handleDislike}
+      onScaleSubmit={handleScaleSubmit}
       progress="1 of 5"
     />
   );
