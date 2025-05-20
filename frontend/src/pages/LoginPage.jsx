@@ -23,11 +23,17 @@ function LoginPage() {
 
       if (response.data.status === "kyc") {
         localStorage.setItem("userEmail", email); // Store the email in local storage
+        if (response.data.user && response.data.user.id) {
+          localStorage.setItem("userId", response.data.user.id);
+        }
         setErrorMessage(""); // Clear any previous error
         setSuccessMessage("Redirecting to KYC...");
         navigate("/kyc-song"); // Redirect to first KYC page in the correct flow
       } else if (response.data.status === "suppliers") {
         localStorage.setItem("userEmail", email); // Store the email in local storage
+        if (response.data.user && response.data.user.id) {
+          localStorage.setItem("userId", response.data.user.id);
+        }
         setErrorMessage(""); // Clear any previous error
         setSuccessMessage("Redirecting to wedding suppliers...");
         navigate("/wedding-suppliers"); // Redirect to Wedding Suppliers Page

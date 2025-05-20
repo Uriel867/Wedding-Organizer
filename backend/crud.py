@@ -43,3 +43,24 @@ def get_suppliers_grouped_by_sections(db: Session):
                 break  # Stop checking other sections once matched
 
     return grouped_suppliers
+
+def update_user_kyc(db: Session, user_id: int, section: str, rank: int):
+    """
+    Update the user's KYC section (food, wedding_hall, music) with the given rank.
+    """
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        return None  # Or raise an exception
+
+    if section == "food":
+        user.food = str(rank)
+    elif section == "wedding_hall":
+        user.wedding_hall = str(rank)
+    elif section == "music":
+        user.music = str(rank)
+    else:
+        return None  # Or handle invalid section
+
+    db.commit()
+    db.refresh(user)
+    return user

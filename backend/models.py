@@ -11,6 +11,11 @@ class User(Base):
     created_at = Column(TIMESTAMP, server_default=func.now())
     rank = Column(Integer, nullable=True, default=None)  # Allow None or 0-9
 
+    # New columns
+    food = Column(String, nullable=True)
+    wedding_hall = Column(String, nullable=True)
+    music = Column(String, nullable=True)
+
     __table_args__ = (
         CheckConstraint('(rank IS NULL OR (rank >= 0 AND rank <= 9))', name='check_rank_range'),  # Allow None or 0-9
     )

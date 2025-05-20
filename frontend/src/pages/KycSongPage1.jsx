@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import KycPageTemplate from "../components/KycPageTemplate";
 import bandImage from "./images/band.jpg";
@@ -6,28 +6,39 @@ import axios from "axios";
 
 function KycSongPage1() {
   const navigate = useNavigate();
-  const userEmail = localStorage.getItem("userEmail"); // Retrieve the logged-in user's email
+  const userId = localStorage.getItem("userId");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleScaleSubmit = async (value) => {
+    setErrorMsg("");
+    if (!userId) {
+      setErrorMsg("User ID not found. Please log in again.");
+      return;
+    }
     try {
-      await axios.post("http://localhost:8000/users/update-rank", {
-        email: userEmail,
-        rankChange: value,
+      console.log("Submitting music KYC:", { userId, value });
+      await axios.post(`http://localhost:8000/users/${userId}/kyc`, {
+        section: "music",
+        rank: value,
       });
-      navigate("/kyc-song-2"); // Go to KycSongPage2 after KycSongPage1
+      navigate("/kyc-song-2");
     } catch (error) {
-      console.error("Error updating rank:", error);
+      setErrorMsg("Error updating music KYC. Please try again.");
+      console.error("Error updating music KYC:", error);
     }
   };
 
   return (
-    <KycPageTemplate
-      title="Do you like that song?"
-      description="Rate your preference on the scale below."
-      imageSrc={bandImage}
-      onScaleSubmit={handleScaleSubmit}
-      progress="4 of 5"
-    />
+    <>
+      {errorMsg && <div style={{ color: 'red', marginBottom: 10 }}>{errorMsg}</div>}
+      <KycPageTemplate
+        title="כמה חשובה לך המוזיקה בחתונה?"
+        description="Rate your preference on the scale below."
+        imageSrc={bandImage}
+        onScaleSubmit={handleScaleSubmit}
+        progress="5 of 5"
+      />
+    </>
   );
 }
 

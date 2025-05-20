@@ -40,11 +40,11 @@ async def login(request: schemas.LoginRequest, db: Session = Depends(get_db)):
     if not bcrypt.checkpw(request.password.encode('utf-8'), user.password_hash.encode('utf-8')):
         raise HTTPException(status_code=401, detail="Invalid email or password")
 
-    # Check if it's the user's first login
+    # Always return user id in response
     if user.rank is None:
-        return {"status": "kyc", "message": "User needs to complete KYC"}
+        return {"status": "kyc", "message": "User needs to complete KYC", "user": {"id": user.id, "name": user.name, "email": user.email}}
     else:
-        return {"status": "suppliers", "message": "Redirect to wedding suppliers"}
+        return {"status": "suppliers", "message": "Redirect to wedding suppliers", "user": {"id": user.id, "name": user.name, "email": user.email}}
 
 class UpdateRankRequest(BaseModel):
     email: str

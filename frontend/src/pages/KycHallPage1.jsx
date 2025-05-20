@@ -6,17 +6,17 @@ import axios from "axios";
 
 function KycHallPage1() {
   const navigate = useNavigate();
-  const userEmail = localStorage.getItem("userEmail"); // Retrieve the logged-in user's email
+  const userId = localStorage.getItem("userId"); // Make sure you store userId in localStorage after login/register
 
   const handleScaleSubmit = async (value) => {
     try {
-      await axios.post("http://localhost:8000/users/update-rank", {
-        email: userEmail,
-        rankChange: value,
+      await axios.post(`http://localhost:8000/users/${userId}/kyc`, {
+        section: "wedding_hall",
+        rank: value,
       });
       navigate("/kyc-hall-2"); // Go to KycHallPage2 after KycHallPage1
     } catch (error) {
-      console.error("Error updating rank:", error);
+      console.error("Error updating wedding_hall KYC:", error);
     }
   };
 

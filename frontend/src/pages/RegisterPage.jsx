@@ -44,6 +44,9 @@ const RegisterPage = () => {
 
       const data = await response.json();
       if (response.ok) {
+        if (data.user && data.user.id) {
+          localStorage.setItem("userId", data.user.id);
+        }
         setSuccessMessage("Registration successful!");
         setFormData({ fullName: "", email: "", password: "", confirmPassword: "" }); // Clear form
         setTimeout(() => navigate("/login"), 1200); // Redirect to login after 1.2s

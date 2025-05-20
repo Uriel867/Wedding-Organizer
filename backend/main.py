@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from routers import users
 from database import Base, engine, get_db
 from crud import get_suppliers_grouped_by_sections
+from routes import router
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
@@ -21,6 +22,7 @@ app.add_middleware(
 
 # Include user routes
 app.include_router(users.router, prefix="/users", tags=["users"])
+app.include_router(router)
 
 @app.get("/")
 def read_root():

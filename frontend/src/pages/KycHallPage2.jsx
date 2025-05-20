@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import KycPageTemplate from "../components/KycPageTemplate";
 import hallImage from "./images/hall.jpg";
@@ -6,28 +6,35 @@ import axios from "axios";
 
 function KycHallPage2() {
   const navigate = useNavigate();
-  const userEmail = localStorage.getItem("userEmail");
+  const userId = localStorage.getItem("userId");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleScaleSubmit = async (value) => {
+    setErrorMsg("");
+    if (!userId) {
+      setErrorMsg("User ID not found. Please log in again.");
+      return;
+    }
     try {
-      await axios.post("http://localhost:8000/users/update-rank", {
-        email: userEmail,
-        rankChange: value,
-      });
+      // Example: you can update another section or just go to next KYC page
       navigate("/kyc-steak"); // Go to KycSteakPage1 after KycHallPage2
     } catch (error) {
-      console.error("Error updating rank:", error);
+      setErrorMsg("Error updating KYC. Please try again.");
+      console.error("Error updating KYC:", error);
     }
   };
 
   return (
-    <KycPageTemplate
-      title="כמה דתית היית רוצה את החתונה? (Page 2)"
-      description="Rate your preference on the scale below."
-      imageSrc={hallImage}
-      onScaleSubmit={handleScaleSubmit}
-      progress="3 of 5"
-    />
+    <>
+      {errorMsg && <div style={{ color: 'red', marginBottom: 10 }}>{errorMsg}</div>}
+      <KycPageTemplate
+        title="כמה דתית היית רוצה את החתונה? (Page 2)"
+        description="Rate your preference on the scale below."
+        imageSrc={hallImage}
+        onScaleSubmit={handleScaleSubmit}
+        progress="3 of 5"
+      />
+    </>
   );
 }
 
