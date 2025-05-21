@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import KycPageTemplate from "../components/KycPageTemplate";
-import hallImage from "./images/hall.jpg";
-import axios from "axios";
+import KycPageTemplate from "../../components/KycPageTemplate";
+import steakImage from "../images/steak.avif";
 
-function KycHallPage2() {
+function KycSteakPage2() {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   const [errorMsg, setErrorMsg] = useState("");
@@ -16,8 +15,9 @@ function KycHallPage2() {
       return;
     }
     try {
-      // Example: you can update another section or just go to next KYC page
-      navigate("/kyc-steak"); // Go to KycSteakPage1 after KycHallPage2
+      // Example: you can update another section or just finish the flow
+      // Here, let's just finish and go to suppliers page
+      navigate("/wedding-suppliers");
     } catch (error) {
       setErrorMsg("Error updating KYC. Please try again.");
       console.error("Error updating KYC:", error);
@@ -28,14 +28,14 @@ function KycHallPage2() {
     <>
       {errorMsg && <div style={{ color: 'red', marginBottom: 10 }}>{errorMsg}</div>}
       <KycPageTemplate
-        title="כמה דתית היית רוצה את החתונה? (Page 2)"
+        title="Do you like steak? (Page 2)"
         description="Rate your preference on the scale below."
-        imageSrc={hallImage}
+        imageSrc={steakImage}
         onScaleSubmit={handleScaleSubmit}
-        progress="3 of 5"
+        progress="2 of 5"
       />
     </>
   );
 }
 
-export default KycHallPage2;
+export default KycSteakPage2;

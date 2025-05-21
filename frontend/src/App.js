@@ -2,19 +2,19 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import KycSongPage1 from "./pages/KycSongPage1";
-import KycSongPage2 from "./pages/KycSongPage2";
-import KycHallPage1 from "./pages/KycHallPage1";
-import KycHallPage2 from "./pages/KycHallPage2";
-import KycSteakPage1 from "./pages/KycSteakPage1";
-import KycSteakPage2 from "./pages/KycSteakPage2";
+import KycSongPage1 from "./pages/kyc/KycSongPage1";
+import KycSongPage2 from "./pages/kyc/KycSongPage2";
+import KycHallPage1 from "./pages/kyc/KycHallPage1";
+import KycHallPage2 from "./pages/kyc/KycHallPage2";
+import KycSteakPage1 from "./pages/kyc/KycSteakPage1";
+import KycSteakPage2 from "./pages/kyc/KycSteakPage2";
 import WeddingSuppliersPage from "./pages/WeddingSuppliersPage";
 import SupplierLoginPage from "./pages/SupplierLoginPage";
 import SupplierRegisterPage from "./pages/SupplierRegisterPage";
-import SupplierKycServicePage from "./pages/SupplierKycServicePage";
-import SupplierKycMusicPage from "./pages/SupplierKycMusicPage";
-import SupplierKycVenuePage from "./pages/SupplierKycVenuePage";
-import SupplierKycDressPage from "./pages/SupplierKycDressPage";
+import SupplierKycServicePage from "./pages/kyc/SupplierKycServicePage";
+import SupplierKycMusicPage from "./pages/kyc/SupplierKycMusicPage";
+import SupplierKycVenuePage from "./pages/kyc/SupplierKycVenuePage";
+import SupplierKycDressPage from "./pages/kyc/SupplierKycDressPage";
 
 function App() {
   return (

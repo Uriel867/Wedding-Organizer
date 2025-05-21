@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../pages/KycStandardPage.css";
+import "../pages/kyc/KycStandardPage.css";
 
 const KycScale = ({ onSubmit, initialValue = 5 }) => {
   const [value, setValue] = useState(initialValue);

@@ -1,21 +1,22 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import KycPageTemplate from "../components/KycPageTemplate";
-import bandImage from "./images/band.jpg";
 import axios from "axios";
+import KycPageTemplate from "../../components/KycPageTemplate";
+import flowersImage from "../images/flowers.jpg";
 
-function SupplierKycMusicPage() {
+function SupplierKycServicePage() {
   const navigate = useNavigate();
-  const supplierEmail = localStorage.getItem("supplierEmail");
+  const supplierEmail = localStorage.getItem("supplierEmail"); // Retrieve the logged-in supplier's email
 
   const handleLike = async () => {
     try {
+      // Example: Set the supplier's service preference
       await axios.post("http://localhost:8000/suppliers/update-preference", {
         email: supplierEmail,
-        preference: "music",
+        preference: "flowers",
         value: 1,
       });
-      navigate("/supplier-kyc-venue");
+      navigate("/supplier-kyc-music"); // Go to next supplier KYC page
     } catch (error) {
       console.error("Error updating supplier preference:", error);
     }
@@ -25,10 +26,10 @@ function SupplierKycMusicPage() {
     try {
       await axios.post("http://localhost:8000/suppliers/update-preference", {
         email: supplierEmail,
-        preference: "music",
+        preference: "flowers",
         value: 0,
       });
-      navigate("/supplier-kyc-venue");
+      navigate("/supplier-kyc-music");
     } catch (error) {
       console.error("Error updating supplier preference:", error);
     }
@@ -36,14 +37,14 @@ function SupplierKycMusicPage() {
 
   return (
     <KycPageTemplate
-      title="Do you provide music or DJ services?"
+      title="Do you offer flower arrangements?"
       description="Let us know if you provide this service."
-      imageSrc={bandImage}
+      imageSrc={flowersImage}
       onLike={handleLike}
       onDislike={handleDislike}
-      progress="2 of 3"
+      progress="1 of 3"
     />
   );
 }
 
-export default SupplierKycMusicPage;
+export default SupplierKycServicePage;

@@ -1,5 +1,5 @@
 import React from "react";
-import "../pages/KycStandardPage.css"; // Corrected path to the CSS file
+import "../pages/kyc/KycStandardPage.css"; // Corrected path to the CSS file
 import KycScale from "./KycScale";
 
 function KycPageTemplate({ title, description, imageSrc, onLike, onDislike, progress, onScaleSubmit }) {

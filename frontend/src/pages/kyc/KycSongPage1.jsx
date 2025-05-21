@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import KycPageTemplate from "../components/KycPageTemplate";
-import steakImage from "./images/steak.avif";
 import axios from "axios";
+import KycPageTemplate from "../../components/KycPageTemplate";
+import bandImage from "../images/band.jpg";
 
-function KycSteakPage2() {
+function KycSongPage1() {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   const [errorMsg, setErrorMsg] = useState("");
@@ -16,12 +16,15 @@ function KycSteakPage2() {
       return;
     }
     try {
-      // Example: you can update another section or just finish the flow
-      // Here, let's just finish and go to suppliers page
-      navigate("/wedding-suppliers");
+      console.log("Submitting music KYC:", { userId, value });
+      await axios.post(`http://localhost:8000/users/${userId}/kyc`, {
+        section: "music",
+        rank: value,
+      });
+      navigate("/kyc-song-2");
     } catch (error) {
-      setErrorMsg("Error updating KYC. Please try again.");
-      console.error("Error updating KYC:", error);
+      setErrorMsg("Error updating music KYC. Please try again.");
+      console.error("Error updating music KYC:", error);
     }
   };
 
@@ -29,14 +32,14 @@ function KycSteakPage2() {
     <>
       {errorMsg && <div style={{ color: 'red', marginBottom: 10 }}>{errorMsg}</div>}
       <KycPageTemplate
-        title="Do you like steak? (Page 2)"
+        title="כמה חשובה לך המוזיקה בחתונה?"
         description="Rate your preference on the scale below."
-        imageSrc={steakImage}
+        imageSrc={bandImage}
         onScaleSubmit={handleScaleSubmit}
-        progress="2 of 5"
+        progress="5 of 5"
       />
     </>
   );
 }
 
-export default KycSteakPage2;
+export default KycSongPage1;

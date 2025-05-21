@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import KycPageTemplate from "../components/KycPageTemplate";
-import bandImage from "./images/band.jpg";
-import axios from "axios";
+import KycPageTemplate from "../../components/KycPageTemplate";
+import hallImage from "../images/hall.jpg";
 
-function KycSongPage2() {
+function KycHallPage2() {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   const [errorMsg, setErrorMsg] = useState("");
@@ -17,7 +16,7 @@ function KycSongPage2() {
     }
     try {
       // Example: you can update another section or just go to next KYC page
-      navigate("/kyc-hall"); // Go to KycHallPage1 after KycSongPage2
+      navigate("/kyc-steak"); // Go to KycSteakPage1 after KycHallPage2
     } catch (error) {
       setErrorMsg("Error updating KYC. Please try again.");
       console.error("Error updating KYC:", error);
@@ -28,14 +27,14 @@ function KycSongPage2() {
     <>
       {errorMsg && <div style={{ color: 'red', marginBottom: 10 }}>{errorMsg}</div>}
       <KycPageTemplate
-        title="Do you like that song? (Page 2)"
+        title="כמה דתית היית רוצה את החתונה? (Page 2)"
         description="Rate your preference on the scale below."
-        imageSrc={bandImage}
+        imageSrc={hallImage}
         onScaleSubmit={handleScaleSubmit}
-        progress="4 of 5"
+        progress="3 of 5"
       />
     </>
   );
 }
 
-export default KycSongPage2;
+export default KycHallPage2;

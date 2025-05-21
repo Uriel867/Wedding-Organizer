@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import KycPageTemplate from "../components/KycPageTemplate";
-import dressImage from "./images/dress.jpg";
 import axios from "axios";
+import KycPageTemplate from "../../components/KycPageTemplate";
+import dressImage from "../images/dress.jpg";
 
 function SupplierKycDressPage() {
   const navigate = useNavigate();
