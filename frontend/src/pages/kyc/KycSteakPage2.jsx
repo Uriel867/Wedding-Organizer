@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import KycPageTemplate from "../../components/KycPageTemplate";
 import steakImage from "../images/steak.avif";
 
@@ -15,8 +16,10 @@ function KycSteakPage2() {
       return;
     }
     try {
-      // Example: you can update another section or just finish the flow
-      // Here, let's just finish and go to suppliers page
+      await axios.post(`http://localhost:8000/users/${userId}/kyc`, {
+        section: "food",
+        rank: value,
+      });
       navigate("/wedding-suppliers");
     } catch (error) {
       setErrorMsg("Error updating KYC. Please try again.");

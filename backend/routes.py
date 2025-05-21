@@ -15,8 +15,8 @@ def set_kyc_answer(user_id: int, kyc: KycUpdateRequest, db: Session = Depends(ge
     """
     if kyc.section not in ["food", "wedding_hall", "music"]:
         raise HTTPException(status_code=400, detail="Invalid section")
-    if not (0 <= kyc.rank <= 9):
-        raise HTTPException(status_code=400, detail="Rank must be between 0 and 9")
+    if not (0 <= kyc.rank <= 10):
+        raise HTTPException(status_code=400, detail="Rank must be between 0 and 10")
 
     user = update_user_kyc(db, user_id, kyc.section, kyc.rank)
     if not user:

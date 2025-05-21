@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import KycPageTemplate from "../../components/KycPageTemplate";
 import hallImage from "../images/hall.jpg";
+import axios from "axios";
 
 function KycHallPage2() {
   const navigate = useNavigate();
@@ -15,7 +16,10 @@ function KycHallPage2() {
       return;
     }
     try {
-      // Example: you can update another section or just go to next KYC page
+      await axios.post(`http://localhost:8000/users/${userId}/kyc`, {
+        section: "wedding_hall",
+        rank: value,
+      });
       navigate("/kyc-steak"); // Go to KycSteakPage1 after KycHallPage2
     } catch (error) {
       setErrorMsg("Error updating KYC. Please try again.");

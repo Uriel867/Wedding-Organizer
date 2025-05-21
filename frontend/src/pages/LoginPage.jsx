@@ -12,6 +12,22 @@ function LoginPage() {
   const [successMessage, setSuccessMessage] = useState(""); // State for success message
   const navigate = useNavigate(); // Initialize useNavigate
 
+  React.useEffect(() => {
+    // If user is already logged in and has completed KYC, redirect to suppliers page
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      // Optionally, you can fetch user data to check if KYC is complete
+      axios.get(`http://localhost:8000/users/${userId}`)
+        .then(res => {
+          const user = res.data;
+          if (user.food && user.music && user.wedding_hall) {
+            navigate("/wedding-suppliers");
+          }
+        })
+        .catch(() => {});
+    }
+  }, [navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -20,7 +36,6 @@ function LoginPage() {
         email: email,
         password: password,
       });
-
       if (response.data.status === "kyc") {
         localStorage.setItem("userEmail", email); // Store the email in local storage
         if (response.data.user && response.data.user.id) {

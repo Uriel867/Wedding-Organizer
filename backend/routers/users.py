@@ -41,10 +41,10 @@ async def login(request: schemas.LoginRequest, db: Session = Depends(get_db)):
         raise HTTPException(status_code=401, detail="Invalid email or password")
 
     # Always return user id in response
-    if user.rank is None:
-        return {"status": "kyc", "message": "User needs to complete KYC", "user": {"id": user.id, "name": user.name, "email": user.email}}
-    else:
+    if user.food and user.music and user.wedding_hall:
         return {"status": "suppliers", "message": "Redirect to wedding suppliers", "user": {"id": user.id, "name": user.name, "email": user.email}}
+    else:
+        return {"status": "kyc", "message": "User needs to complete KYC", "user": {"id": user.id, "name": user.name, "email": user.email}}
 
 class UpdateRankRequest(BaseModel):
     email: str
