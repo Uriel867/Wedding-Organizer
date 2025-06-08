@@ -44,3 +44,33 @@ async def register_supplier(request: SupplierRegister, db: Session = Depends(get
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=str(e))
+
+class SupplierLogin(BaseModel):
+    email: str
+    password: str
+
+@router.post("/login")
+async def login_supplier(request: SupplierLogin, db: Session = Depends(get_db)):
+    """Handle supplier login."""
+    # Fetch the supplier by email
+    supplier = db.query(Vendor).filter(Vendor.email == request.email).first()
+    if not supplier:
+        raise HTTPException(status_code=400, detail="Invalid email or password")
+
+    # Verify the password
+    if not bcrypt.checkpw(request.password.encode('utf-8'), supplier.password_hash.encode('utf-8')):
+        raise HTTPException(status_code=400, detail="Invalid email or password")
+
+    # Include redirect URL for KYC flow
+    redirect_url = "/supplier-kyc-service"  # Starting point of the KYC flow
+
+    return {
+        "status": "ok",
+        "message": "Login successful",
+        "redirect_url": redirect_url,
+        "supplier": {
+            "id": supplier.id,
+            "business_name": supplier.buisness_name,
+            "email": supplier.email
+        }
+    }

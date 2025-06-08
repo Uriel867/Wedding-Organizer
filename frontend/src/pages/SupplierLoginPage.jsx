@@ -11,12 +11,27 @@ function SupplierLoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Replace with your actual supplier login logic
-    if (email === "supplier@example.com" && password === "password") {
-      setSuccessMessage("Login successful! Redirecting...");
-      navigate("/supplier-dashboard", { replace: true }); // Use replace to avoid navigation issues
-    } else {
-      setErrorMessage("Invalid supplier credentials");
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    try {
+      const response = await fetch("http://localhost:8000/suppliers/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSuccessMessage("Login successful");
+        navigate(data.redirect_url, { replace: true }); // Redirect to KYC flow
+      } else {
+        setErrorMessage(data.detail || "Invalid supplier credentials");
+      }
+    } catch (error) { 
+      console.error("Login error:", error);
+      setErrorMessage("An error occurred. Please try again.");
     }
   };
 
