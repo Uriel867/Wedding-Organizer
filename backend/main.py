@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from routers import users
+from routers import users, suppliers  # Import suppliers router
 from database import Base, engine, get_db
 from crud import get_suppliers_grouped_by_sections
 from routes import router
@@ -22,6 +22,7 @@ app.add_middleware(
 
 # Include user routes
 app.include_router(users.router, prefix="/users", tags=["users"])
+app.include_router(suppliers.router, prefix="/suppliers", tags=["suppliers"])  # Add suppliers router
 app.include_router(router)
 
 @app.get("/")

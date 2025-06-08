@@ -23,7 +23,7 @@ class User(Base):
 class Vendor(Base):
     __tablename__ = "vendors"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)  # Ensure auto-increment
     google_place_id = Column(String, unique=True, nullable=False)
     buisness_name = Column(String, nullable=False)
     category = Column(String, nullable=True)  # Optional: based on search query
