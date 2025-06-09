@@ -70,8 +70,9 @@ function WeddingSuppliersPage() {
         // Fetch user scores first
         const userId = localStorage.getItem("userId");
         if (userId) {
-          const userRes = await fetch(`http://localhost:8000/users/${userId}`);
+          const userRes = await fetch(`http://localhost:8000/users/users/${userId}`);
           const userData = await userRes.json();
+          console.log("User data:", userData);
           setUserScores({
             food: userData.food,
             music: userData.music,
@@ -110,8 +111,33 @@ function WeddingSuppliersPage() {
     }));
   };
 
+  // Helper to sort suppliers by score difference
   const sortSuppliersByMatch = (suppliers, section) => {
-    return suppliers;
+    // Get the correct score field based on section
+    const scoreField = section === "מקומות" ? "wedding_hall" : section;
+    const userScore = userScores[scoreField];
+
+    // First filter suppliers into two groups: with scores and without scores
+    const suppliersWithScores = suppliers.filter(s => 
+      s[scoreField] !== null && s[scoreField] !== undefined
+    );
+    const suppliersWithoutScores = suppliers.filter(s => 
+      s[scoreField] === null || s[scoreField] === undefined
+    );
+    const supplierDifs = suppliersWithScores.map(supplier =>
+      Math.abs(supplier[scoreField] - userScore)
+    );
+    console.log(userScore)
+
+    // Sort suppliers with scores by their distance from user score
+    const sortedWithScores = suppliersWithScores.sort((a, b) => {
+      const aDiff = Math.abs(a[scoreField] - userScore);
+      const bDiff = Math.abs(b[scoreField] - userScore);
+      return aDiff - bDiff; // Smallest difference first
+    });
+
+    // Combine the sorted suppliers with scores with the unsorted ones without scores
+    return [...sortedWithScores, ...suppliersWithoutScores];
   };
 
   // Get filtered and sorted suppliers
@@ -135,6 +161,16 @@ function WeddingSuppliersPage() {
 
 
   const getMatchScore = (supplier, section) => {
+    const scoreField = section === "מקומות" ? "wedding_hall" : section;
+    const supplierScore = supplier[scoreField];
+    const userScore = userScores[scoreField];
+
+    // Only calculate score if both supplier and user have scores
+    if (supplierScore !== null && supplierScore !== undefined && 
+        userScore !== null && userScore !== undefined) {
+      return Math.abs(supplierScore - userScore);
+    }
+    
     return undefined;
   };
 
