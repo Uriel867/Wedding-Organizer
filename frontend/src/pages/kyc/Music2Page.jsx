@@ -4,7 +4,7 @@ import KycPageTemplate from "../../components/KycPageTemplate";
 import bandImage from "../images/band.jpg";
 import axios from "axios";
 
-function KycSongPage2() {
+function Music2Page() {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   const [errorMsg, setErrorMsg] = useState("");
@@ -16,7 +16,7 @@ function KycSongPage2() {
       return;
     }
     try {
-      await axios.post(`http://localhost:8000/users/${userId}/kyc`, {
+      await axios.post(`http://localhost:8000/users/${userId}/kyc?page=2`, {
         section: "music",
         rank: value,
       });
@@ -32,7 +32,6 @@ function KycSongPage2() {
       {errorMsg && <div style={{ color: 'red', marginBottom: 10 }}>{errorMsg}</div>}
       <KycPageTemplate
         title="Do you like that song? (Page 2)"
-        description="Rate your preference on the scale below."
         imageSrc={bandImage}
         onScaleSubmit={handleScaleSubmit}
         progress="4 of 5"
@@ -41,4 +40,4 @@ function KycSongPage2() {
   );
 }
 
-export default KycSongPage2;
+export default Music2Page;

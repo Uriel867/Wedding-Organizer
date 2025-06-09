@@ -3,11 +3,9 @@ import "../pages/kyc/KycStandardPage.css";
 
 const KycScale = ({ onSubmit, initialValue = 5 }) => {
   const [value, setValue] = useState(initialValue);
-  const [selected, setSelected] = useState(false);
 
   const handleChange = (e) => {
     setValue(Number(e.target.value));
-    setSelected(true);
   };
 
   const handleNext = () => {
@@ -34,12 +32,9 @@ const KycScale = ({ onSubmit, initialValue = 5 }) => {
         onChange={handleChange}
         className="kyc-scale-range"
       />
-      <div className="kyc-scale-value">{value}</div>
-      {selected && (
-        <button className="kyc-next-button" onClick={handleNext} style={{marginTop: 16}}>
-          Next
-        </button>
-      )}
+      <button className="kyc-next-button" onClick={handleNext} style={{marginTop: 16}}>
+        Next
+      </button>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import axios from "axios";
 import KycPageTemplate from "../../components/KycPageTemplate";
 import bandImage from "../images/band.jpg";
 
-function KycSongPage1() {
+function Music1Page() {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   const [errorMsg, setErrorMsg] = useState("");
@@ -17,7 +17,7 @@ function KycSongPage1() {
     }
     try {
       console.log("Submitting music KYC:", { userId, value });
-      await axios.post(`http://localhost:8000/users/${userId}/kyc`, {
+      await axios.post(`http://localhost:8000/users/${userId}/kyc?page=1`, {
         section: "music",
         rank: value,
       });
@@ -33,7 +33,6 @@ function KycSongPage1() {
       {errorMsg && <div style={{ color: 'red', marginBottom: 10 }}>{errorMsg}</div>}
       <KycPageTemplate
         title="כמה חשובה לך המוזיקה בחתונה?"
-        description="Rate your preference on the scale below."
         imageSrc={bandImage}
         onScaleSubmit={handleScaleSubmit}
         progress="5 of 5"
@@ -42,4 +41,4 @@ function KycSongPage1() {
   );
 }
 
-export default KycSongPage1;
+export default Music1Page;

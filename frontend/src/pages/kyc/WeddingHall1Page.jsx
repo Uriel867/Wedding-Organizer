@@ -4,13 +4,13 @@ import axios from "axios";
 import KycPageTemplate from "../../components/KycPageTemplate";
 import hallImage from "../images/hall.jpg";
 
-function KycHallPage1() {
+function WeddingHall1Page() {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId"); // Make sure you store userId in localStorage after login/register
 
   const handleScaleSubmit = async (value) => {
     try {
-      await axios.post(`http://localhost:8000/users/${userId}/kyc`, {
+      await axios.post(`http://localhost:8000/users/${userId}/kyc?page=1`, {
         section: "wedding_hall",
         rank: value,
       });
@@ -23,12 +23,10 @@ function KycHallPage1() {
   return (
     <KycPageTemplate
       title="כמה דתית היית רוצה את החתונה?"
-      description="Rate your preference on the scale below."
       imageSrc={hallImage}
       onScaleSubmit={handleScaleSubmit}
-      progress="3 of 5"
     />
   );
 }
 
-export default KycHallPage1;
+export default WeddingHall1Page;

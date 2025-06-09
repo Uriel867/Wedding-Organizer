@@ -2,12 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import KycSongPage1 from "./pages/kyc/KycSongPage1";
-import KycSongPage2 from "./pages/kyc/KycSongPage2";
-import KycHallPage1 from "./pages/kyc/KycHallPage1";
-import KycHallPage2 from "./pages/kyc/KycHallPage2";
-import KycSteakPage1 from "./pages/kyc/KycSteakPage1";
-import KycSteakPage2 from "./pages/kyc/KycSteakPage2";
+import Food1Page from "./pages/kyc/Food1Page";
+import Food2Page from "./pages/kyc/Food2Page";
+import Music1Page from "./pages/kyc/Music1Page";
+import Music2Page from "./pages/kyc/Music2Page";
+import WeddingHall1Page from "./pages/kyc/WeddingHall1Page";
+import WeddingHall2Page from "./pages/kyc/WeddingHall2Page";
 import WeddingSuppliersPage from "./pages/WeddingSuppliersPage";
 import SupplierLoginPage from "./pages/SupplierLoginPage";
 import SupplierRegisterPage from "./pages/SupplierRegisterPage";
@@ -26,12 +26,12 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
 
         {/* KYC Flow */}
-        <Route path="/kyc-song" element={<KycSongPage1 />} />
-        <Route path="/kyc-song-2" element={<KycSongPage2 />} />
-        <Route path="/kyc-hall" element={<KycHallPage1 />} />
-        <Route path="/kyc-hall-2" element={<KycHallPage2 />} />
-        <Route path="/kyc-steak" element={<KycSteakPage1 />} />
-        <Route path="/kyc-steak-2" element={<KycSteakPage2 />} />
+        <Route path="/kyc-song" element={<Food1Page />} />
+        <Route path="/kyc-song-2" element={<Food2Page />} />
+        <Route path="/kyc-hall" element={<WeddingHall1Page />} />
+        <Route path="/kyc-hall-2" element={<WeddingHall2Page />} />
+        <Route path="/kyc-steak" element={<Music1Page />} />
+        <Route path="/kyc-steak-2" element={<Music2Page />} />
         <Route path="/wedding-suppliers" element={<WeddingSuppliersPage />} />
 
         {/* Supplier Flow */}

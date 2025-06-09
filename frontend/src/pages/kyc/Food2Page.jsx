@@ -4,7 +4,7 @@ import axios from "axios";
 import KycPageTemplate from "../../components/KycPageTemplate";
 import steakImage from "../images/steak.avif";
 
-function KycSteakPage1() {
+function Food2Page() {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   const [errorMsg, setErrorMsg] = useState("");
@@ -16,14 +16,14 @@ function KycSteakPage1() {
       return;
     }
     try {
-      await axios.post(`http://localhost:8000/users/${userId}/kyc`, {
+      await axios.post(`http://localhost:8000/users/${userId}/kyc?page=2`, {
         section: "food",
         rank: value,
       });
-      navigate("/kyc-steak-2");
+      navigate("/wedding-suppliers");
     } catch (error) {
-      setErrorMsg("Error updating food KYC. Please try again.");
-      console.error("Error updating food KYC:", error);
+      setErrorMsg("Error updating KYC. Please try again.");
+      console.error("Error updating KYC:", error);
     }
   };
 
@@ -31,14 +31,13 @@ function KycSteakPage1() {
     <>
       {errorMsg && <div style={{ color: 'red', marginBottom: 10 }}>{errorMsg}</div>}
       <KycPageTemplate
-        title="כמה בשרי היית רוצה את החתונה?"
-        description="Rate your preference on the scale below."
+        title="Do you like steak? (Page 2)"
         imageSrc={steakImage}
         onScaleSubmit={handleScaleSubmit}
-        progress="1 of 5"
+        progress="2 of 5"
       />
     </>
   );
 }
 
-export default KycSteakPage1;
+export default Food2Page;
