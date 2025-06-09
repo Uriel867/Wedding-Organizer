@@ -107,7 +107,7 @@ def save_vendors_to_db(vendors, category, section, db: Session):
             "ARS_score": None,
             "email": None,
             "password_hash": None,
-            "kyc_completed": 0
+            "kyc_grade": None
         }
         # Save the vendor to the database
         create_vendor(db, vendor_data)

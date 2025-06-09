@@ -47,19 +47,49 @@ p {
   font-size: 14px;
 }
 
+.register-input,
+.register-form select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  font-family: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.register-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.register-form label {
+  margin-bottom: 4px;
+  font-weight: bold;
+  display: block;
+}
+
 .password-field {
   position: relative;
 }
 
 .password-field input {
-  padding-right: 15px;
+  padding-right: 36px; /* Increased from 15px for more space */
 }
 
 .password-field span {
   position: absolute;
-  right: 0px;
+  right: 12px;
   top: 50%;
-  transform: translateY(-90%);
+  transform: translateY(-50%);
   cursor: pointer;
   color: #9ca3af;
 }
@@ -118,4 +148,64 @@ p {
   color: #f44336; /* Red color for errors */
   font-size: 14px;
   margin-top: 10px;
+}
+
+/* Optional: Add a custom arrow for select */
+.register-form select {
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 98%;
+  background-position-y: 50%;
+  cursor: pointer;
+}
+
+/* Make sure all form elements use border-box */
+.register-form input,
+.register-form select,
+.create-account-button {
+  box-sizing: border-box;
+}
+
+/* Ensure the button and inputs have the same width and are centered */
+.register-form input,
+.register-form select,
+.create-account-button {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 16px 0;
+  display: block;
+}
+
+/* Remove extra margin from the button if needed */
+.create-account-button {
+  margin-bottom: 0;
+}
+
+.register-input option[disabled] {
+  color: #9ca3af;         /* Same as your input placeholder color */
+  font-size: 1rem;        /* Match input font size */
+  font-weight: 400;       /* Regular weight */
+}
+
+.register-input option[disabled],
+.register-input option[disabled][hidden] {
+  color: #9ca3af !important;
+  font-size: 1rem;   /* Changed from 1.25rem to 1rem */
+  font-weight: 400;
+}
+
+.register-input:invalid {
+  color: #9ca3af;
+  font-weight: 400;
+}
+.register-input option {
+  color: #111827;
+}
+.register-input option[disabled] {
+  color: #9ca3af;
+}
+
+/* Specific styles for businessName select element */
+#businessName {
+  margin-bottom: 16px;
 }

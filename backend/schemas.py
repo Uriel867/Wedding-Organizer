@@ -13,4 +13,4 @@ class LoginRequest(BaseModel):
 
 class KycUpdateRequest(BaseModel):
     section: str  # 'food', 'wedding_hall', or 'music'
-    rank: int     # 0-9
+    rank: int     # 0-10
