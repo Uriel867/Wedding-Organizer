@@ -35,9 +35,10 @@ function SupplierKycMusicPage() {
       const nextQuery = rest.length > 0 ? `?next=${rest.join(",")}` : "";
       if (first === "venue") navigate(`/supplier-kyc-venue${nextQuery}`);
       else if (first === "food") navigate(`/supplier-kyc-food${nextQuery}`);
-      else navigate("/supplier-dashboard");
+      else if (first === "music") navigate(`/supplier-kyc-music${nextQuery}`);
+      else navigate("/supplier-kyc-complete"); // All done, go to complete page
     } else {
-      navigate("/supplier-dashboard");
+      navigate("/supplier-kyc-complete"); // All done, go to complete page
     }
   };
 
