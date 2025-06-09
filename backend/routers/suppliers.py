@@ -71,13 +71,24 @@ async def login_supplier(request: SupplierLogin, db: Session = Depends(get_db)):
     if not bcrypt.checkpw(request.password.encode('utf-8'), supplier.password_hash.encode('utf-8')):
         raise HTTPException(status_code=400, detail="Invalid email or password")
 
-    # Include redirect URL for KYC flow
-    redirect_url = "/supplier-kyc-service"  # Starting point of the KYC flow
+    # If all three fields are null, redirect to supplier KYC start page
+    if supplier.food is None and supplier.wedding_hall is None and supplier.music is None:
+        return {
+            "status": "kyc",
+            "message": "Supplier needs to complete KYC",
+            "redirect_url": "/supplier-kyc-start",
+            "supplier": {
+                "id": supplier.id,
+                "business_name": supplier.buisness_name,
+                "email": supplier.email
+            }
+        }
 
+    # Otherwise, redirect to the supplier dashboard or main page
     return {
         "status": "ok",
         "message": "Login successful",
-        "redirect_url": redirect_url,
+        "redirect_url": "/supplier-dashboard",
         "supplier": {
             "id": supplier.id,
             "business_name": supplier.buisness_name,

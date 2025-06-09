@@ -25,7 +25,13 @@ function SupplierLoginPage() {
 
       if (response.ok) {
         setSuccessMessage("Login successful");
-        navigate(data.redirect_url, { replace: true }); // Redirect to KYC flow
+        // Redirect based on backend response
+        if (data.redirect_url) {
+          navigate(data.redirect_url, { replace: true });
+        } else {
+          // fallback: go to dashboard
+          navigate("/supplier-dashboard", { replace: true });
+        }
       } else {
         setErrorMessage(data.detail || "Invalid supplier credentials");
       }

@@ -15,6 +15,7 @@ import SupplierKycServicePage from "./pages/kyc/SupplierKycServicePage";
 import SupplierKycMusicPage from "./pages/kyc/SupplierKycMusicPage";
 import SupplierKycVenuePage from "./pages/kyc/SupplierKycVenuePage";
 import SupplierKycDressPage from "./pages/kyc/SupplierKycDressPage";
+import SupplierKycStartPage from "./pages/SupplierKycStartPage";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/supplier-kyc-music" element={<SupplierKycMusicPage />} />
         <Route path="/supplier-kyc-venue" element={<SupplierKycVenuePage />} />
         <Route path="/supplier-kyc-dress" element={<SupplierKycDressPage />} />
+        <Route path="/supplier-kyc-start" element={<SupplierKycStartPage />} />
 
         {/* Default Route (Redirect to Login) */}
         <Route path="*" element={<Navigate to="/login" />} />
