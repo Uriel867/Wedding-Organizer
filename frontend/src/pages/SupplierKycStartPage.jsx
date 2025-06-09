@@ -94,8 +94,24 @@ const SupplierKycStartPage = () => {
       });
       if (res.ok) {
         setSuccess("Profile updated!");
-        // Optionally, navigate to the next KYC step or dashboard
-        setTimeout(() => navigate("/supplier-kyc-music"), 1200);
+        // Redirect to the correct KYC page(s) based on expertise
+        if (form.music && !form.food && !form.wedding_hall) {
+          setTimeout(() => navigate("/supplier-kyc-music"), 1200);
+        } else if (form.food && !form.music && !form.wedding_hall) {
+          setTimeout(() => navigate("/supplier-kyc-food"), 1200);
+        } else if (form.wedding_hall && !form.music && !form.food) {
+          setTimeout(() => navigate("/supplier-kyc-venue"), 1200);
+        } else if (form.food && form.wedding_hall && !form.music) {
+          setTimeout(() => navigate("/supplier-kyc-food?next=venue"), 1200);
+        } else if (form.food && form.music && !form.wedding_hall) {
+          setTimeout(() => navigate("/supplier-kyc-food?next=music"), 1200);
+        } else if (form.music && form.wedding_hall && !form.food) {
+          setTimeout(() => navigate("/supplier-kyc-music?next=venue"), 1200);
+        } else if (form.food && form.music && form.wedding_hall) {
+          setTimeout(() => navigate("/supplier-kyc-food?next=music,venue"), 1200);
+        } else {
+          setTimeout(() => navigate("/supplier-dashboard"), 1200);
+        }
       } else {
         let data;
         try {

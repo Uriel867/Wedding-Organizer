@@ -13,6 +13,7 @@ class User(Base):
     wedding_hall = Column(Integer, nullable=True, default=None)
     music = Column(Integer, nullable=True, default=None)
 
+
 class Vendor(Base):
     __tablename__ = "vendors"
 

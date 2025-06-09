@@ -1,11 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import KycPageTemplate from "../../components/KycPageTemplate";
 import hallImage from "../images/hall.jpg";
 
 function SupplierKycVenuePage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const next = new URLSearchParams(location.search).get("next");
   const supplierEmail = localStorage.getItem("supplierEmail");
 
   const handleLike = async () => {
@@ -15,7 +17,7 @@ function SupplierKycVenuePage() {
         preference: "venue",
         value: 1,
       });
-      navigate("/supplier-dashboard"); // End of supplier KYC
+      handleNext();
     } catch (error) {
       console.error("Error updating supplier preference:", error);
     }
@@ -28,9 +30,21 @@ function SupplierKycVenuePage() {
         preference: "venue",
         value: 0,
       });
-      navigate("/supplier-dashboard");
+      handleNext();
     } catch (error) {
       console.error("Error updating supplier preference:", error);
+    }
+  };
+
+  const handleNext = () => {
+    if (next) {
+      const [first, ...rest] = next.split(",");
+      const nextQuery = rest.length > 0 ? `?next=${rest.join(",")}` : "";
+      if (first === "food") navigate(`/supplier-kyc-food${nextQuery}`);
+      else if (first === "music") navigate(`/supplier-kyc-music${nextQuery}`);
+      else navigate("/supplier-dashboard");
+    } else {
+      navigate("/supplier-dashboard");
     }
   };
 

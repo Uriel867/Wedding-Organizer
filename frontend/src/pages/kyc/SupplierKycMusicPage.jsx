@@ -1,11 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import KycPageTemplate from "../../components/KycPageTemplate";
 import bandImage from "../images/band.jpg";
 
 function SupplierKycMusicPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const next = new URLSearchParams(location.search).get("next");
   const supplierEmail = localStorage.getItem("supplierEmail");
 
   const handleLike = async () => {
@@ -15,7 +17,7 @@ function SupplierKycMusicPage() {
         preference: "music",
         value: 1,
       });
-      navigate("/supplier-kyc-venue");
+      handleNext();
     } catch (error) {
       console.error("Error updating supplier preference:", error);
     }
@@ -28,9 +30,21 @@ function SupplierKycMusicPage() {
         preference: "music",
         value: 0,
       });
-      navigate("/supplier-kyc-venue");
+      handleNext();
     } catch (error) {
       console.error("Error updating supplier preference:", error);
+    }
+  };
+
+  const handleNext = () => {
+    if (next) {
+      const [first, ...rest] = next.split(",");
+      const nextQuery = rest.length > 0 ? `?next=${rest.join(",")}` : "";
+      if (first === "venue") navigate(`/supplier-kyc-venue${nextQuery}`);
+      else if (first === "food") navigate(`/supplier-kyc-food${nextQuery}`);
+      else navigate("/supplier-dashboard");
+    } else {
+      navigate("/supplier-dashboard");
     }
   };
 
