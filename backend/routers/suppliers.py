@@ -103,3 +103,61 @@ def get_all_suppliers(db: Session = Depends(get_db)):
         {"id": s.id, "buisness_name": s.buisness_name}
         for s in suppliers
     ]
+
+class SupplierUpdate(BaseModel):
+    business_name: str
+    category: str = None
+    section: str = None
+    address: str = None
+    phone_number: str = None
+    website: str = None
+    food: int = None
+    wedding_hall: int = None
+    music: int = None
+
+@router.post("/{supplier_id}/update")
+async def update_supplier_profile(supplier_id: int, request: SupplierUpdate, db: Session = Depends(get_db)):
+    supplier = db.query(Vendor).filter(Vendor.id == supplier_id).first()
+    if not supplier:
+        raise HTTPException(status_code=404, detail="Supplier not found")
+    supplier.buisness_name = request.business_name
+    supplier.category = request.category
+    supplier.section = request.section
+    supplier.address = request.address
+    supplier.phone_number = request.phone_number
+    supplier.website = request.website
+    supplier.food = request.food
+    supplier.wedding_hall = request.wedding_hall
+    supplier.music = request.music
+    db.commit()
+    db.refresh(supplier)
+    return {"status": "ok", "supplier": {
+        "id": supplier.id,
+        "business_name": supplier.buisness_name,
+        "category": supplier.category,
+        "section": supplier.section,
+        "address": supplier.address,
+        "phone_number": supplier.phone_number,
+        "website": supplier.website,
+        "food": supplier.food,
+        "wedding_hall": supplier.wedding_hall,
+        "music": supplier.music
+    }}
+
+@router.get("/{supplier_id}")
+def get_supplier_by_id(supplier_id: int, db: Session = Depends(get_db)):
+    supplier = db.query(Vendor).filter(Vendor.id == supplier_id).first()
+    if not supplier:
+        raise HTTPException(status_code=404, detail="Supplier not found")
+    return {
+        "id": supplier.id,
+        "buisness_name": supplier.buisness_name,
+        "category": supplier.category,
+        "section": supplier.section,
+        "address": supplier.address,
+        "phone_number": supplier.phone_number,
+        "website": supplier.website,
+        "food": supplier.food,
+        "wedding_hall": supplier.wedding_hall,
+        "music": supplier.music
+    }

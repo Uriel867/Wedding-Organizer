@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-import schemas, crud
 from database import get_db
+import crud
 import bcrypt
-from pydantic import BaseModel
+import schemas
 
 router = APIRouter()
 
@@ -44,3 +44,17 @@ async def login(request: schemas.LoginRequest, db: Session = Depends(get_db)):
         return {"status": "kyc", "message": "User needs to complete KYC", "user": {"id": user.id, "name": user.name, "email": user.email}}
     else:
         return {"status": "suppliers", "message": "Redirect to wedding suppliers", "user": {"id": user.id, "name": user.name, "email": user.email}}
+
+@router.get("/users/{user_id}")
+async def get_user(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(crud.User).filter(crud.User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return {
+        "id": user.id,
+        "name": user.name,
+        "email": user.email,
+        "food": user.food,
+        "wedding_hall": user.wedding_hall,
+        "music": user.music,
+    }

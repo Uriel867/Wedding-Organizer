@@ -6,7 +6,7 @@ from crud import create_vendor, get_vendor_by_google_place_id
 from dotenv import load_dotenv
 from sections import sections
 from models import Vendor
-MAX_VENDORS_PER_KEYWORD = 20
+MAX_VENDORS_PER_KEYWORD = 30
 # Load environment variables
 load_dotenv()
 
@@ -104,10 +104,11 @@ def save_vendors_to_db(vendors, category, section, db: Session):
             "website": details.get("website"),
             "lat": vendor["geometry"]["location"]["lat"],
             "lng": vendor["geometry"]["location"]["lng"],
-            "ARS_score": None,
             "email": None,
             "password_hash": None,
-            "kyc_grade": None
+            "food": None,
+            "wedding_hall": None,
+            "music": None
         }
         # Save the vendor to the database
         create_vendor(db, vendor_data)

@@ -25,6 +25,10 @@ function SupplierLoginPage() {
 
       if (response.ok) {
         setSuccessMessage("Login successful");
+        // Save supplierId to localStorage if present in response
+        if (data.supplier && data.supplier.id) {
+          localStorage.setItem("supplierId", data.supplier.id);
+        }
         // Redirect based on backend response
         if (data.redirect_url) {
           navigate(data.redirect_url, { replace: true });

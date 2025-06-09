@@ -34,7 +34,6 @@ class Vendor(Base):
     food = Column(Integer, nullable=True, default=None)
     wedding_hall = Column(Integer, nullable=True, default=None)
     music = Column(Integer, nullable=True, default=None)
-    kyc_grade = Column(Integer, nullable=True, default=None)
 
 
 

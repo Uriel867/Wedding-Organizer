@@ -15,17 +15,16 @@ function LoginPage() {
   React.useEffect(() => {
     // If user is already logged in and has completed KYC, redirect to suppliers page
     const userId = localStorage.getItem("userId");
-    if (userId) {
-      // Optionally, you can fetch user data to check if KYC is complete
-      axios.get(`http://localhost:8000/users/${userId}`)
-        .then(res => {
-          const user = res.data;
-          if (user.food && user.music && user.wedding_hall) {
-            navigate("/wedding-suppliers");
-          }
-        })
-        .catch(() => {});
-    }
+    if (!userId || isNaN(Number(userId))) return;
+    // Optionally, you can fetch user data to check if KYC is complete
+    axios.get(`http://localhost:8000/users/${userId}`)
+      .then(res => {
+        const user = res.data;
+        if (user.food && user.music && user.wedding_hall) {
+          navigate("/wedding-suppliers");
+        }
+      })
+      .catch(() => {});
   }, [navigate]);
 
   const handleSubmit = async (e) => {
