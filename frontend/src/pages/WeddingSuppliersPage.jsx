@@ -110,62 +110,8 @@ function WeddingSuppliersPage() {
     }));
   };
 
-  // Filter suppliers based on the `showSelected` state
-  const getFilteredSuppliers = () => {
-    if (!showSelected) {
-      return groupedSuppliers;
-    }
-
-    const filteredSuppliers = {};
-    Object.entries(groupedSuppliers).forEach(([section, suppliers]) => {
-      filteredSuppliers[section] = suppliers.filter(
-        (supplier) => likedSuppliers[supplier.id]
-      );
-    });
-
-    return filteredSuppliers;
-  };
-
-  // Helper to sort suppliers by best match
   const sortSuppliersByMatch = (suppliers, section) => {
-    // Use wedding_hall score for מקומות section
-    const scoreField = section === "מקומות" ? "wedding_hall" : section;
-    const userScore = userScores[scoreField];
-    if (userScore === null || userScore === undefined) return suppliers;
-
-    console.log(`Sorting suppliers for section ${section}, using field ${scoreField}`);
-    console.log('User score:', userScore);
-    
-    // First, log all supplier scores
-    suppliers.forEach(s => {
-      console.log(`${s.buisness_name}: ${s[scoreField]} (diff: ${Math.abs((s[scoreField] || 0) - userScore)})`);
-    });
-    
-    const sortedSuppliers = [...suppliers].sort((a, b) => {
-      // Get the scores, ensuring they are numbers
-      const scoreA = a[scoreField] !== null ? Number(a[scoreField]) : -1;
-      const scoreB = b[scoreField] !== null ? Number(b[scoreField]) : -1;
-      
-      // Calculate absolute differences from user score
-      const diffA = Math.abs(scoreA - userScore);
-      const diffB = Math.abs(scoreB - userScore);
-      
-      // Sort by smallest difference first
-      if (diffA !== diffB) {
-        return diffA - diffB;
-      }
-      
-      // If differences are equal, prefer higher scores
-      return scoreB - scoreA;
-    });
-
-    // Log sorted results
-    console.log('Sorted suppliers:');
-    sortedSuppliers.forEach(s => {
-      console.log(`${s.buisness_name}: ${s[scoreField]} (diff: ${Math.abs((s[scoreField] || 0) - userScore)})`);
-    });
-
-    return sortedSuppliers;
+    return suppliers;
   };
 
   // Get filtered and sorted suppliers
@@ -187,20 +133,9 @@ function WeddingSuppliersPage() {
     );
   };
 
-  // Calculate match score for a supplier
+
   const getMatchScore = (supplier, section) => {
-    // Use wedding_hall score for מקומות section
-    const scoreField = section === "מקומות" ? "wedding_hall" : section;
-    const userScore = userScores[scoreField];
-    
-    if (!userScore) return undefined;
-    
-    // Convert supplier score to number, default to -1 if null/undefined
-    const supplierScore = supplier[scoreField] !== null ? Number(supplier[scoreField]) : -1;
-    
-    if (supplierScore === -1) return undefined;
-    
-    return Math.abs(supplierScore - userScore);
+    return undefined;
   };
 
   // Logout handler
