@@ -6,6 +6,7 @@ import SupplierKycStartPage from "./pages/SupplierKycStartPage";
 import SupplierKycFoodPage from "./pages/kyc/SupplierKycFoodPage";
 import SupplierKycMusicPage from "./pages/kyc/SupplierKycMusicPage";
 import SupplierKycVenuePage from "./pages/kyc/SupplierKycVenuePage";
+import SupplierDashboard from "./pages/SupplierDashboard"; // You'll need to create this
 
 function App() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ function App() {
         <Route path="/supplier-kyc-food" element={<SupplierKycFoodPage />} />
         <Route path="/supplier-kyc-music" element={<SupplierKycMusicPage />} />
         <Route path="/supplier-kyc-venue" element={<SupplierKycVenuePage />} />
-        {/* Other routes */}
+        <Route path="/supplier-dashboard" element={<SupplierDashboard />} />
       </Routes>
       <button
         className="register-button"

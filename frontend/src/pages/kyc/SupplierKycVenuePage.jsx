@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import KycPageTemplate from "../../components/KycPageTemplate";
@@ -7,32 +7,25 @@ import hallImage from "../images/hall.jpg";
 function SupplierKycVenuePage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [error, setError] = useState("");
   const next = new URLSearchParams(location.search).get("next");
   const supplierEmail = localStorage.getItem("supplierEmail");
+  
+  if (!supplierEmail) {
+    navigate("/supplier-login");
+    return null;
+  }
 
-  const handleLike = async () => {
+  const handleScaleSubmit = async (value) => {
     try {
       await axios.post("http://localhost:8000/suppliers/update-preference", {
         email: supplierEmail,
         preference: "venue",
-        value: 1,
+        value,
       });
       handleNext();
     } catch (error) {
-      console.error("Error updating supplier preference:", error);
-    }
-  };
-
-  const handleDislike = async () => {
-    try {
-      await axios.post("http://localhost:8000/suppliers/update-preference", {
-        email: supplierEmail,
-        preference: "venue",
-        value: 0,
-      });
-      handleNext();
-    } catch (error) {
-      console.error("Error updating supplier preference:", error);
+      setError("Failed to update preference. Please try again.");
     }
   };
 
@@ -53,9 +46,9 @@ function SupplierKycVenuePage() {
       title="Do you offer a wedding venue?"
       description="Let us know if you provide this service."
       imageSrc={hallImage}
-      onLike={handleLike}
-      onDislike={handleDislike}
+      onScaleSubmit={handleScaleSubmit}
       progress="3 of 3"
+      error={error}
     />
   );
 }

@@ -94,24 +94,30 @@ const SupplierKycStartPage = () => {
       });
       if (res.ok) {
         setSuccess("Profile updated!");
-        // Redirect to the correct KYC page(s) based on expertise
-        if (form.music && !form.food && !form.wedding_hall) {
-          setTimeout(() => navigate("/supplier-kyc-music"), 1200);
-        } else if (form.food && !form.music && !form.wedding_hall) {
-          setTimeout(() => navigate("/supplier-kyc-food"), 1200);
-        } else if (form.wedding_hall && !form.music && !form.food) {
-          setTimeout(() => navigate("/supplier-kyc-venue"), 1200);
-        } else if (form.food && form.wedding_hall && !form.music) {
-          setTimeout(() => navigate("/supplier-kyc-food?next=venue"), 1200);
-        } else if (form.food && form.music && !form.wedding_hall) {
-          setTimeout(() => navigate("/supplier-kyc-food?next=music"), 1200);
-        } else if (form.music && form.wedding_hall && !form.food) {
-          setTimeout(() => navigate("/supplier-kyc-music?next=venue"), 1200);
-        } else if (form.food && form.music && form.wedding_hall) {
-          setTimeout(() => navigate("/supplier-kyc-food?next=music,venue"), 1200);
-        } else {
-          setTimeout(() => navigate("/supplier-dashboard"), 1200);
+        // Determine the first service to complete KYC for and any subsequent services
+        const services = [];
+        if (form.food) services.push('food');
+        if (form.music) services.push('music');
+        if (form.wedding_hall) services.push('venue');
+
+        if (services.length === 0) {
+          // This shouldn't happen due to earlier validation, but handle it just in case
+          navigate("/supplier-dashboard");
+          return;
         }
+
+        // First service determines the initial route
+        const firstService = services[0];
+        const remainingServices = services.slice(1);
+        
+        // Build the navigation URL
+        let navigationUrl = `/supplier-kyc-${firstService}`;
+        if (remainingServices.length > 0) {
+          navigationUrl += `?next=${remainingServices.join(',')}`;
+        }
+
+        // Navigate after a short delay to allow the success message to be seen
+        setTimeout(() => navigate(navigationUrl), 1200);
       } else {
         let data;
         try {

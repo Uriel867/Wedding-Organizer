@@ -161,3 +161,32 @@ def get_supplier_by_id(supplier_id: int, db: Session = Depends(get_db)):
         "wedding_hall": supplier.wedding_hall,
         "music": supplier.music
     }
+
+class PreferenceUpdate(BaseModel):
+    email: str
+    preference: str
+    value: int
+
+@router.post("/update-preference")
+async def update_supplier_preference(request: PreferenceUpdate, db: Session = Depends(get_db)):
+    """Update a supplier's preference value for a specific service type."""
+    supplier = db.query(Vendor).filter(Vendor.email == request.email).first()
+    if not supplier:
+        raise HTTPException(status_code=404, detail="Supplier not found")
+    
+    # Map preference to column name
+    preference_map = {
+        "food": "food",
+        "venue": "wedding_hall",
+        "music": "music"
+    }
+    
+    column = preference_map.get(request.preference)
+    if not column:
+        raise HTTPException(status_code=400, detail="Invalid preference type")
+    
+    # Update the preference
+    setattr(supplier, column, request.value)
+    db.commit()
+    
+    return {"status": "ok", "message": f"{request.preference} preference updated"}

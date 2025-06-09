@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+import KycPageTemplate from "../../components/KycPageTemplate";
+import steakImage from "../images/steak.avif";
 
-const SupplierKycFoodPage = () => {
+function SupplierKycFoodPage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [error, setError] = useState("");
   const next = new URLSearchParams(location.search).get("next");
+  const supplierEmail = localStorage.getItem("supplierEmail");
+
+  if (!supplierEmail) {
+    navigate("/supplier-login");
+    return null;
+  }
+
+  const handleScaleSubmit = async (value) => {
+    try {
+      await axios.post("http://localhost:8000/suppliers/update-preference", {
+        email: supplierEmail,
+        preference: "food",
+        value,
+      });
+      handleNext();
+    } catch (error) {
+      setError("Failed to update preference. Please try again.");
+    }
+  };
 
   const handleNext = () => {
     if (next) {
@@ -19,27 +42,15 @@ const SupplierKycFoodPage = () => {
   };
 
   return (
-    <div style={{ maxWidth: 500, margin: "40px auto", padding: 24, background: "#fff", borderRadius: 12, boxShadow: "0 2px 10px #eee" }}>
-      <h2>Food Supplier KYC</h2>
-      <p>Please answer the following questions about your food services.</p>
-      {/* Add your food-specific KYC questions here */}
-      <div style={{ marginTop: 24 }}>
-        <label>What type of cuisine do you offer?</label>
-        <input className="register-input" style={{ width: "100%", marginBottom: 16 }} />
-        <label>Do you provide vegetarian/vegan options?</label>
-        <select className="register-input" style={{ width: "100%", marginBottom: 16 }}>
-          <option value="">Select</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-        <label>Describe your most popular dish:</label>
-        <textarea className="register-input" style={{ width: "100%", minHeight: 60 }} />
-      </div>
-      <button className="purple-button" style={{ width: "100%", padding: 12, fontSize: "1.1em", borderRadius: 8, background: "#5a38ea", color: "#fff", border: "none", marginTop: 24, cursor: "pointer" }} onClick={handleNext}>
-        {next ? "Next" : "Finish"}
-      </button>
-    </div>
+    <KycPageTemplate
+      title="Do you provide catering or food services?"
+      description="Let us know if you provide this service."
+      imageSrc={steakImage}
+      onScaleSubmit={handleScaleSubmit}
+      progress="1 of 3"
+      error={error}
+    />
   );
-};
+}
 
 export default SupplierKycFoodPage;
