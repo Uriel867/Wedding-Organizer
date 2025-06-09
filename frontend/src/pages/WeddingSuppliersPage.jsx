@@ -111,10 +111,18 @@ function WeddingSuppliersPage() {
     }));
   };
 
+  // Map section names to their relevant score fields
+  const sectionScoreFields = {
+    "מקומות": "wedding_hall",
+    "אוכל": "food",
+    "מוזיקה": "music",
+    // Add more mappings here if you have more sections
+  };
+
   // Helper to sort suppliers by score difference
   const sortSuppliersByMatch = (suppliers, section) => {
     // Get the correct score field based on section
-    const scoreField = section === "מקומות" ? "wedding_hall" : section;
+    const scoreField = sectionScoreFields[section] || section;
     const userScore = userScores[scoreField];
 
     // First filter suppliers into two groups: with scores and without scores
@@ -124,13 +132,9 @@ function WeddingSuppliersPage() {
     const suppliersWithoutScores = suppliers.filter(s => 
       s[scoreField] === null || s[scoreField] === undefined
     );
-    const supplierDifs = suppliersWithScores.map(supplier =>
-      Math.abs(supplier[scoreField] - userScore)
-    );
-    console.log(userScore)
 
-    // Sort suppliers with scores by their distance from user score
-    const sortedWithScores = suppliersWithScores.sort((a, b) => {
+    // Sort suppliers with scores by their distance from user score (use slice to avoid in-place sort)
+    const sortedWithScores = suppliersWithScores.slice().sort((a, b) => {
       const aDiff = Math.abs(a[scoreField] - userScore);
       const bDiff = Math.abs(b[scoreField] - userScore);
       return aDiff - bDiff; // Smallest difference first
@@ -138,6 +142,20 @@ function WeddingSuppliersPage() {
 
     // Combine the sorted suppliers with scores with the unsorted ones without scores
     return [...sortedWithScores, ...suppliersWithoutScores];
+  };
+
+  const getMatchScore = (supplier, section) => {
+    const scoreField = sectionScoreFields[section] || section;
+    const supplierScore = supplier[scoreField];
+    const userScore = userScores[scoreField];
+
+    // Only calculate score if both supplier and user have scores
+    if (supplierScore !== null && supplierScore !== undefined && 
+        userScore !== null && userScore !== undefined) {
+      return Math.abs(supplierScore - userScore);
+    }
+    
+    return undefined;
   };
 
   // Get filtered and sorted suppliers
@@ -157,21 +175,6 @@ function WeddingSuppliersPage() {
         sortSuppliersByMatch(suppliers, section),
       ])
     );
-  };
-
-
-  const getMatchScore = (supplier, section) => {
-    const scoreField = section === "מקומות" ? "wedding_hall" : section;
-    const supplierScore = supplier[scoreField];
-    const userScore = userScores[scoreField];
-
-    // Only calculate score if both supplier and user have scores
-    if (supplierScore !== null && supplierScore !== undefined && 
-        userScore !== null && userScore !== undefined) {
-      return Math.abs(supplierScore - userScore);
-    }
-    
-    return undefined;
   };
 
   // Logout handler
