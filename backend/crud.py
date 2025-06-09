@@ -40,22 +40,35 @@ def get_suppliers_grouped_by_sections(db: Session):
 
     return grouped_suppliers
 
-def update_user_kyc(db: Session, user_id: int, section: str, rank: int):
+def update_user_kyc(db: Session, user_id: int, section: str, rank: int, page: int):
     """
-    Update the user's KYC section (food, wedding_hall, music) with the given rank.
+    Update the user's KYC section (food, wedding_hall, music) with the given rank for a specific page (1 or 2).
+    Always save the average of both answers for each topic.
     """
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
-        return None  # Or raise an exception
+        return None
 
-    if section == "food":
-        user.food = rank
-    elif section == "wedding_hall":
-        user.wedding_hall = rank
-    elif section == "music":
-        user.music = rank
-    else:
-        return None  # Or handle invalid section
+    # Use a cross-platform temp directory
+    import os, pickle, tempfile
+    temp_dir = tempfile.gettempdir()
+    cache_file = os.path.join(temp_dir, f"kyc_{user_id}_{section}.pkl")
+    answers = [None, None]
+    if os.path.exists(cache_file):
+        with open(cache_file, "rb") as f:
+            answers = pickle.load(f)
+    answers[page-1] = rank
+    with open(cache_file, "wb") as f:
+        pickle.dump(answers, f)
+
+    valid_answers = [a for a in answers if a is not None]
+    if len(valid_answers) == 2:
+        avg = int(round(sum(valid_answers) / 2))
+        setattr(user, section, avg)
+        os.remove(cache_file)  # Clean up after both answers are in
+    elif len(valid_answers) == 1:
+        # Only one answer so far, don't update DB yet
+        pass
 
     db.commit()
     db.refresh(user)

@@ -154,7 +154,7 @@ function LoginPage() {
 
         {/* Add the Register button */}
         <div className="register-link">
-          <p>Don't have an account?</p>
+          <p style={{ marginBottom: 4 }}>Don't have an account?</p>
           <Link to="/register">
             <button className="register-button">Register</button>
           </Link>
@@ -162,9 +162,9 @@ function LoginPage() {
 
         {/* Add the Supplier Login button */}
         <div className="supplier-login-link">
-          <p>Are you a supplier?</p>
+          <p style={{ marginBottom: 4 }}>Are you a supplier?</p>
           <Link to="/supplier-login">
-            <button className="supplier-login-button">Supplier Login</button>
+            <button className="register-button">Supplier Login</button>
           </Link>
         </div>
       </div>

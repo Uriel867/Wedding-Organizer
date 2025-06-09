@@ -132,9 +132,35 @@ const SupplierKycStartPage = () => {
     }
   };
 
+  // Logout button handler
+  const handleLogout = () => {
+    localStorage.removeItem("supplierId");
+    localStorage.removeItem("supplierEmail");
+    navigate("/supplier-login");
+  };
+
+  // Redo KYC handler for supplier
+  const handleRedoKyc = async () => {
+    const supplierId = localStorage.getItem("supplierId");
+    if (!supplierId) {
+      handleLogout();
+      return;
+    }
+    try {
+      await fetch(`http://localhost:8000/suppliers/${supplierId}/reset-kyc`, { method: "POST" });
+      navigate("/supplier-kyc-start");
+    } catch (error) {
+      alert("Failed to reset supplier KYC. Please try again.");
+    }
+  };
+
   return (
     <div className="kyc-supplier-container" style={{ maxWidth: 500, margin: "40px auto", padding: 24, background: "#fff", borderRadius: 12, boxShadow: "0 2px 10px #eee" }}>
       <h2>Complete Your Business Profile</h2>
+      <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
+        <button className="purple-button" onClick={handleLogout}>Logout</button>
+        <button className="purple-button" onClick={handleRedoKyc}>Redo KYC</button>
+      </div>
       <form onSubmit={handleSubmit}>
         <label>Business Name</label>
         <input name="business_name" value={form.business_name} onChange={handleChange} required className="register-input" />
