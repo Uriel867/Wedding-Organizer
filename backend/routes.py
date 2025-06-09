@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 from crud import update_user_kyc
 from schemas import KycUpdateRequest
+from models import User
 
 router = APIRouter()
 
@@ -26,3 +27,17 @@ def set_kyc_answer(user_id: int, kyc: KycUpdateRequest, db: Session = Depends(ge
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return {"message": f"{kyc.section} updated (page {page})", "user_id": user_id, "section": kyc.section, "value": kyc.rank, "page": page}
+
+@router.post("/users/{user_id}/reset-kyc")
+def reset_kyc(user_id: int, db: Session = Depends(get_db)):
+    """
+    Reset all KYC scores for a user (set food, music, wedding_hall to None).
+    """
+    user = db.query(User).filter_by(id=user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    user.food = None
+    user.music = None
+    user.wedding_hall = None
+    db.commit()
+    return {"message": "KYC reset", "user_id": user_id}
