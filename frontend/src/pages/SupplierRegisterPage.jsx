@@ -142,10 +142,13 @@ const SupplierRegisterPage = () => {
         <button type="submit" className="create-account-button">Register</button>
         {successMessage && <p className="success-message">{successMessage}</p>}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <p className="terms" style={{ marginTop: 16, marginBottom: 0 }}>
+          By signing up, you agree to our
+          <a href="#" className="link-text" onClick={e => {e.preventDefault(); alert('Terms of Service not implemented yet')}}>Terms of Service</a>
+          and
+          <a href="#" className="link-text" onClick={e => {e.preventDefault(); alert('Privacy Policy not implemented yet')}}>Privacy Policy</a>.
+        </p>
       </form>
-      <p className="terms">
-        By signing up, you agree to our <button className="link-button" onClick={() => alert('Terms of Service not implemented yet')}>Terms of Service</button> and <button className="link-button" onClick={() => alert('Privacy Policy not implemented yet')}>Privacy Policy</button>
-      </p>
       <p className="signin-link">
         Already have a supplier account? <a href="/supplier-login">Sign In</a>
       </p>
