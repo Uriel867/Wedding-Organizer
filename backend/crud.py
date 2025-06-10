@@ -33,10 +33,9 @@ def get_suppliers_grouped_by_sections(db: Session):
     grouped_suppliers = {section: [] for section in sections.keys()}
 
     for supplier in suppliers:
-        for section, categories in sections.items():
-            if supplier.category in categories:
-                grouped_suppliers[section].append(supplier)
-                break  # Stop checking other sections once matched
+        # Use the section field directly instead of trying to match categories
+        if supplier.section and supplier.section in sections:
+            grouped_suppliers[supplier.section].append(supplier)
 
     return grouped_suppliers
 
