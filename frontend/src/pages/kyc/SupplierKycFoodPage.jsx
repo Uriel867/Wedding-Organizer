@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import KycPageTemplate from "../../components/KycPageTemplate";
@@ -6,14 +6,22 @@ import steakImage from "../images/steak.avif";
 
 function SupplierKycFoodPage() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [error, setError] = useState("");
+  const location = useLocation();  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
   const next = new URLSearchParams(location.search).get("next");
   const supplierEmail = localStorage.getItem("supplierEmail");
+  const supplierId = localStorage.getItem("supplierId");
 
-  if (!supplierEmail) {
-    navigate("/supplier-login");
-    return null;
+  useEffect(() => {
+    if (!supplierEmail || !supplierId) {
+      navigate("/supplier-login");
+    } else {
+      setLoading(false);
+    }
+  }, [supplierEmail, supplierId, navigate]);
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   const handleScaleSubmit = async (value) => {

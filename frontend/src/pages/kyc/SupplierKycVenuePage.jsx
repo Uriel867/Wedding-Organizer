@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import KycPageTemplate from "../../components/KycPageTemplate";
@@ -8,13 +8,17 @@ function SupplierKycVenuePage() {
   const navigate = useNavigate();
   const location = useLocation();
   const [error, setError] = useState("");
-  const next = new URLSearchParams(location.search).get("next");
+  const [loading, setLoading] = useState(true);  const next = new URLSearchParams(location.search).get("next");
   const supplierEmail = localStorage.getItem("supplierEmail");
-  
-  if (!supplierEmail) {
-    navigate("/supplier-login");
-    return null;
-  }
+  const supplierId = localStorage.getItem("supplierId");
+
+  useEffect(() => {
+    if (!supplierEmail || !supplierId) {
+      navigate("/supplier-login");
+    } else {
+      setLoading(false);
+    }
+  }, [supplierEmail, supplierId, navigate]);
 
   const handleScaleSubmit = async (value) => {
     try {
@@ -41,6 +45,10 @@ function SupplierKycVenuePage() {
       navigate("/supplier-kyc-complete"); // All done, go to complete page
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <KycPageTemplate

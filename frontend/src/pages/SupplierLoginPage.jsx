@@ -21,13 +21,16 @@ function SupplierLoginPage() {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
+      const data = await response.json();      if (response.ok) {
         setSuccessMessage("Login successful");
-        // Save supplierId to localStorage if present in response
-        if (data.supplier && data.supplier.id) {
-          localStorage.setItem("supplierId", data.supplier.id);
+        // Save supplier info to localStorage if present in response
+        if (data.supplier) {
+          if (data.supplier.id) {
+            localStorage.setItem("supplierId", data.supplier.id);
+          }
+          if (data.supplier.email) {
+            localStorage.setItem("supplierEmail", data.supplier.email);
+          }
         }
         // Redirect based on backend response
         if (data.redirect_url) {

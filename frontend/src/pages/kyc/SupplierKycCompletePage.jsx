@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SupplierKycCompletePage() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const supplierEmail = localStorage.getItem("supplierEmail");
+    const supplierId = localStorage.getItem("supplierId");
+    if (!supplierEmail || !supplierId) {
+      navigate("/supplier-login");
+    } else {
+      setLoading(false);
+    }
+  }, [navigate]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   const handleLogout = () => {
     localStorage.removeItem("supplierEmail");
+    localStorage.removeItem("supplierId");
     navigate("/supplier-login");
   };
 

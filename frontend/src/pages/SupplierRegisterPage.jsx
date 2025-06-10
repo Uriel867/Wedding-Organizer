@@ -57,9 +57,13 @@ const SupplierRegisterPage = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        setSuccessMessage("Supplier registration successful!");
-        if (data.vendor && data.vendor.id) {
-          localStorage.setItem("supplierId", data.vendor.id);
+        setSuccessMessage("Supplier registration successful!");        if (data.vendor) {
+          if (data.vendor.id) {
+            localStorage.setItem("supplierId", data.vendor.id);
+          }
+          if (data.vendor.email) {
+            localStorage.setItem("supplierEmail", data.vendor.email);
+          }
         }
         // If supplier was selected from the list, redirect to KYC start page to edit existing info
         setTimeout(() => navigate("/supplier-kyc-start"), 1200);

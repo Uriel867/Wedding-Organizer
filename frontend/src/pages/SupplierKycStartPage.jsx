@@ -22,12 +22,14 @@ const SupplierKycStartPage = () => {
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
   // Fetch current supplier info on mount
   useEffect(() => {
-    // You may want to get supplier id/email from localStorage or context
     const supplierId = localStorage.getItem("supplierId");
-    if (!supplierId) return;
+    const supplierEmail = localStorage.getItem("supplierEmail");
+    if (!supplierId || !supplierEmail) {
+      navigate("/supplier-login");
+      return;
+    }
     fetch(`http://localhost:8000/suppliers/${supplierId}`)
       .then((res) => res.json())
       .then((data) => {
