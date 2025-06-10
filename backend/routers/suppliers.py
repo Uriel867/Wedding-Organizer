@@ -82,13 +82,11 @@ async def login_supplier(request: SupplierLogin, db: Session = Depends(get_db)):
                 "business_name": supplier.buisness_name,
                 "email": supplier.email
             }
-        }
-
-    # Otherwise, redirect to the supplier dashboard or main page
+        }    # If KYC was already done (any field is not null), send to complete page
     return {
         "status": "ok",
         "message": "Login successful",
-        "redirect_url": "/supplier-dashboard",
+        "redirect_url": "/supplier-kyc-complete",
         "supplier": {
             "id": supplier.id,
             "business_name": supplier.buisness_name,

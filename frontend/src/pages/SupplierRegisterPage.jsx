@@ -54,19 +54,11 @@ const SupplierRegisterPage = () => {
           email: formData.email,
           password: formData.password,
         }),
-      });
-      const data = await response.json();
+      });      const data = await response.json();
       if (response.ok) {
-        setSuccessMessage("Supplier registration successful!");        if (data.vendor) {
-          if (data.vendor.id) {
-            localStorage.setItem("supplierId", data.vendor.id);
-          }
-          if (data.vendor.email) {
-            localStorage.setItem("supplierEmail", data.vendor.email);
-          }
-        }
-        // If supplier was selected from the list, redirect to KYC start page to edit existing info
-        setTimeout(() => navigate("/supplier-kyc-start"), 1200);
+        setSuccessMessage("Registration successful!");
+        setFormData({ businessName: "", businessNameText: "", email: "", password: "", confirmPassword: "" }); // Clear form
+        setTimeout(() => navigate("/supplier-login"), 1200); // Redirect to login after 1.2s
         return;
       } else {
         setErrorMessage(data.detail || "Registration failed.");
