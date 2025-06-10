@@ -11,10 +11,8 @@ import WeddingHall2Page from "./pages/kyc/WeddingHall2Page";
 import WeddingSuppliersPage from "./pages/WeddingSuppliersPage";
 import SupplierLoginPage from "./pages/SupplierLoginPage";
 import SupplierRegisterPage from "./pages/SupplierRegisterPage";
-import SupplierKycServicePage from "./pages/kyc/SupplierKycServicePage";
 import SupplierKycMusicPage from "./pages/kyc/SupplierKycMusicPage";
 import SupplierKycVenuePage from "./pages/kyc/SupplierKycVenuePage";
-import SupplierKycDressPage from "./pages/kyc/SupplierKycDressPage";
 import SupplierKycStartPage from "./pages/SupplierKycStartPage";
 import SupplierKycFoodPage from "./pages/kyc/SupplierKycFoodPage";
 import SupplierKycCompletePage from "./pages/kyc/SupplierKycCompletePage";
@@ -39,10 +37,8 @@ function App() {
         {/* Supplier Flow */}
         <Route path="/supplier-login" element={<SupplierLoginPage />} />
         <Route path="/supplier-register" element={<SupplierRegisterPage />} />
-        <Route path="/supplier-kyc-service" element={<SupplierKycServicePage />} />
         <Route path="/supplier-kyc-music" element={<SupplierKycMusicPage />} />
         <Route path="/supplier-kyc-venue" element={<SupplierKycVenuePage />} />
-        <Route path="/supplier-kyc-dress" element={<SupplierKycDressPage />} />
         <Route path="/supplier-kyc-food" element={<SupplierKycFoodPage />} />
         <Route path="/supplier-kyc-start" element={<SupplierKycStartPage />} />
         <Route path="/supplier-kyc-complete" element={<SupplierKycCompletePage />} />
