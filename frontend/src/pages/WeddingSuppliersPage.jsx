@@ -3,26 +3,75 @@ import { useNavigate } from "react-router-dom";
 import "./WeddingSuppliersPage.css";
 
 function SupplierCard({ supplier, liked, onToggleLike, matchScore, section }) {
-  // Try all possible name fields
   const displayName = supplier.name || supplier.business_name || supplier.buisness_name || "Unnamed Supplier";
-  
-  // Get the actual score field based on section
   const scoreField = section === "מקומות" ? "wedding_hall" : section;
   const score = supplier[scoreField];
   
+  // Helper function to get match description and style
+  const getMatchInfo = () => {
+    if (matchScore === undefined) return null;
+    
+    if (matchScore === 0) {
+      return {
+        text: "Perfect Match! ✨",
+        color: "#2e7d32",
+        background: "#e8f5e9",
+        emoji: "🎯"
+      };
+    }
+    
+    // For non-perfect matches, describe how close they are
+    if (matchScore <= 1) {
+      return {
+        text: "Very close to your style!",
+        color: "#1976d2",
+        background: "#e3f2fd",
+        emoji: "⭐"
+      };
+    }
+    if (matchScore <= 2) {
+      return {
+        text: "Close to your preferences",
+        color: "#7b1fa2",
+        background: "#f3e5f5",
+        emoji: "👍"
+      };
+    }
+    if (matchScore <= 3) {
+      return {
+        text: "Somewhat matches your style",
+        color: "#ed6c02",
+        background: "#fff3e0",
+        emoji: "🤔"
+      };
+    }
+    return {
+      text: "Different style than your preferences",
+      color: "#757575",
+      background: "#f5f5f5",
+      emoji: "📝"
+    };
+  };
+
+  const matchInfo = getMatchInfo();
+
   return (
     <div className="supplier-card">
       <div className="supplier-info">
         <strong>{displayName}</strong>
-        {matchScore !== undefined && (
-          <div className="match-info" style={{ fontSize: "0.9em", marginTop: 4 }}>
-            <div style={{ color: matchScore === 0 ? "#388e3c" : "#666" }}>
-              {matchScore === 0
-                ? "Perfect Match! 🎯"
-                : `Match Difference: ${matchScore}`}
-            </div>
-            <div style={{ color: "#666", fontSize: "0.8em" }}>
-              {score !== null && score !== undefined ? `Score: ${score}` : "No score available"}
+        {matchInfo && (
+          <div className="match-info" style={{ fontSize: "0.9em", marginTop: 8, marginBottom: 12 }}>
+            <div style={{ 
+              color: matchInfo.color,
+              background: matchInfo.background,
+              padding: "6px 12px",
+              borderRadius: "12px",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px"
+            }}>
+              <span>{matchInfo.emoji}</span>
+              <span>{matchInfo.text}</span>
             </div>
           </div>
         )}
