@@ -139,28 +139,40 @@ const SupplierKycStartPage = () => {
     localStorage.removeItem("supplierId");
     localStorage.removeItem("supplierEmail");
     navigate("/supplier-login");
-  };
-  return (
-    <div className="kyc-supplier-container" style={{ maxWidth: 500, margin: "40px auto", padding: 24, background: "#fff", borderRadius: 12, boxShadow: "0 2px 10px #eee" }}>
-      <h2>Complete Your Business Profile</h2>      <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
-        <button className="purple-button" onClick={handleLogout}>Logout</button>
+  };  return (
+    <div className="kyc-supplier-container" style={{ maxWidth: 500, margin: "40px auto", padding: 24, background: "#fff", borderRadius: 12, boxShadow: "0 2px 10px #eee", position: "relative" }}>
+      <div style={{ position: "absolute", top: 24, right: 24 }}>
+        <button 
+          className="purple-button" 
+          onClick={handleLogout}
+          style={{
+            padding: "8px 16px",
+            fontSize: "0.9em",
+            background: "transparent",
+            border: "1px solid #5a38ea",
+            color: "#5a38ea",
+            borderRadius: 6
+          }}
+        >
+          Logout
+        </button>
       </div>
-      <form onSubmit={handleSubmit}>
-        <label>Business Name</label>
-        <input name="business_name" value={form.business_name} onChange={handleChange} required className="register-input" />
-        <label>Category</label>
-        <input name="category" value={form.category} onChange={handleChange} className="register-input" />
-        <label>Section</label>
+      <h2 style={{ marginBottom: 24 }}>Complete Your Business Profile</h2>
+      <form onSubmit={handleSubmit}>        <label>Business Name <span style={{ color: '#e53e3e' }}>*</span></label>
+        <input name="business_name" value={form.business_name} onChange={handleChange} required className="register-input" placeholder="Enter your business name" />
+        <label>Category <span style={{ color: '#e53e3e' }}>*</span></label>
+        <input name="category" value={form.category} onChange={handleChange} required className="register-input" placeholder="e.g., Restaurant, Wedding Hall, Band" />
+        <label>Section <span style={{ color: '#e53e3e' }}>*</span></label>
         <select name="section" value={form.section} onChange={handleChange} required className="register-input">
           <option value="" disabled>Select section</option>
           {sectionOptions.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
         </select>
-        <label>Address</label>
-        <input name="address" value={form.address} onChange={handleChange} className="register-input" />
-        <label>Phone Number</label>
-        <input name="phone_number" value={form.phone_number} onChange={handleChange} className="register-input" />
-        <label>Website</label>
-        <input name="website" value={form.website} onChange={handleChange} className="register-input" />
+        <label>Address <span style={{ color: '#e53e3e' }}>*</span></label>
+        <input name="address" value={form.address} onChange={handleChange} required className="register-input" placeholder="Full business address" />
+        <label>Phone Number <span style={{ color: '#e53e3e' }}>*</span></label>
+        <input name="phone_number" value={form.phone_number} onChange={handleChange} required className="register-input" placeholder="Business contact number" />
+        <label>Website <span style={{ color: '#666' }}>(optional)</span></label>
+        <input name="website" value={form.website} onChange={handleChange} className="register-input" placeholder="Your business website (if any)" />
         <div style={{ margin: "18px 0 8px 0" }}>
           <label><input type="checkbox" name="food" checked={form.food} onChange={handleChange} /> Food</label>
           <label style={{ marginLeft: 16 }}><input type="checkbox" name="wedding_hall" checked={form.wedding_hall} onChange={handleChange} /> Venue</label>
