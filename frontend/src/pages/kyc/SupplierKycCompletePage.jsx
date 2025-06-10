@@ -1,9 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SupplierKycCompletePage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem("supplierEmail");
+    localStorage.removeItem("supplierId");
+    navigate("/supplier-login");
+  }, [navigate]);
+
+  const handleEditProfile = useCallback(async () => {
+    const supplierId = localStorage.getItem("supplierId");
+    try {
+      const response = await fetch(`http://localhost:8000/suppliers/${supplierId}/reset-kyc`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      if (response.ok) {
+        navigate("/supplier-kyc-start");
+      } else {
+        alert("Failed to reset profile. Please try again.");
+      }
+    } catch (error) {
+      alert("Network error. Please try again.");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const supplierEmail = localStorage.getItem("supplierEmail");
@@ -18,15 +43,6 @@ function SupplierKycCompletePage() {
   if (loading) {
     return <div>Loading...</div>;
   }
-  const handleLogout = () => {
-    localStorage.removeItem("supplierEmail");
-    localStorage.removeItem("supplierId");
-    navigate("/supplier-login");
-  };
-
-  const handleKycAgain = () => {
-    navigate("/supplier-kyc-start");
-  };
 
   return (
     <div style={{
@@ -73,7 +89,7 @@ function SupplierKycCompletePage() {
             Log Out
           </button>
           <button
-            onClick={handleKycAgain}
+            onClick={handleEditProfile}
             style={{
               background: "#6366f1",
               color: "#fff",
@@ -85,11 +101,10 @@ function SupplierKycCompletePage() {
               cursor: "pointer",
               boxShadow: "0 2px 8px rgba(99, 102, 241, 0.15)",
               transition: "background 0.2s"
-            }}
-            onMouseOver={e => e.currentTarget.style.background = '#4338ca'}
+            }}            onMouseOver={e => e.currentTarget.style.background = '#4338ca'}
             onMouseOut={e => e.currentTarget.style.background = '#6366f1'}
           >
-            Do KYC Again
+            Edit Business Profile
           </button>
         </div>
       </div>

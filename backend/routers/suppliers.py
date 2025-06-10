@@ -188,3 +188,18 @@ async def update_supplier_preference(request: PreferenceUpdate, db: Session = De
     db.commit()
     
     return {"status": "ok", "message": f"{request.preference} preference updated"}
+
+@router.post("/{supplier_id}/reset-kyc")
+async def reset_kyc(supplier_id: int, db: Session = Depends(get_db)):
+    """Reset a supplier's KYC fields to null."""
+    supplier = db.query(Vendor).filter(Vendor.id == supplier_id).first()
+    if not supplier:
+        raise HTTPException(status_code=404, detail="Supplier not found")
+    
+    # Reset KYC fields
+    supplier.food = None
+    supplier.wedding_hall = None
+    supplier.music = None
+    
+    db.commit()
+    return {"status": "ok", "message": "KYC reset successfully"}
