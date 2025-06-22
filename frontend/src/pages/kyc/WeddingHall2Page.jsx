@@ -31,7 +31,7 @@ function WeddingHall2Page() {
     <>
       {errorMsg && <div style={{ color: 'red', marginBottom: 10 }}>{errorMsg}</div>}
       <KycPageTemplate
-        title="כמה דתית היית רוצה את החתונה? (Page 2)"
+        title="כמה חשוב לשים דגש על עיצוב האולם בחתונה?"
         imageSrc={hallImage}
         onScaleSubmit={handleScaleSubmit}
         progress="3 of 5"

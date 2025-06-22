@@ -31,7 +31,7 @@ function Food2Page() {
     <>
       {errorMsg && <div style={{ color: 'red', marginBottom: 10 }}>{errorMsg}</div>}
       <KycPageTemplate
-        title="Do you like steak? (Page 2)"
+        title="כמה היית מדרג את חשיבות הבשר ביחס לשאר המנות?"
         imageSrc={steakImage}
         onScaleSubmit={handleScaleSubmit}
         progress="2 of 5"

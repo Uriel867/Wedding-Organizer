@@ -31,7 +31,7 @@ function Food1Page() {
     <>
       {errorMsg && <div style={{ color: 'red', marginBottom: 10 }}>{errorMsg}</div>}
       <KycPageTemplate
-        title="כמה בשרי היית רוצה את החתונה?"
+        title="כמה חשוב שיהיה מגוון של טעמים שונים בחתונה?"
         imageSrc={steakImage}
         onScaleSubmit={handleScaleSubmit}
         progress="1 of 5"

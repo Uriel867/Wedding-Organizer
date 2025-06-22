@@ -22,7 +22,7 @@ function WeddingHall1Page() {
 
   return (
     <KycPageTemplate
-      title="כמה דתית היית רוצה את החתונה?"
+      title="כמה חשוב שהחתונה תהיה בגן אירועים"
       imageSrc={hallImage}
       onScaleSubmit={handleScaleSubmit}
     />

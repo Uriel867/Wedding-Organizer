@@ -31,7 +31,7 @@ function Music2Page() {
     <>
       {errorMsg && <div style={{ color: 'red', marginBottom: 10 }}>{errorMsg}</div>}
       <KycPageTemplate
-        title="Do you like that song? (Page 2)"
+        title="כמה חשוב שתהיה מוסיקה מזרחית בחתונה"
         imageSrc={bandImage}
         onScaleSubmit={handleScaleSubmit}
         progress="4 of 5"

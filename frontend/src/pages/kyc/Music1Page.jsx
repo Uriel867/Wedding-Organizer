@@ -32,7 +32,7 @@ function Music1Page() {
     <>
       {errorMsg && <div style={{ color: 'red', marginBottom: 10 }}>{errorMsg}</div>}
       <KycPageTemplate
-        title="כמה חשובה לך המוזיקה בחתונה?"
+        title="כמה חשוב שתהיה מוסיקת מיינסטרים בחתונה?"
         imageSrc={bandImage}
         onScaleSubmit={handleScaleSubmit}
         progress="5 of 5"
